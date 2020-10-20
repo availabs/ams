@@ -4,7 +4,7 @@ import AmsComps from "./components"
 
 import amsManager  from "./wrappers/ams-manager"
 
-const AmsManager = ({ children }) => {
+const AmsManager = ({ children, ...props }) => {
   return <div className="max-w-6xl m-auto">{ children }</div>
 }
 export default {

@@ -54,7 +54,7 @@ const UpdatePassword = ({ updatePassword, ...props }) => {
 export default wrapper(({ user, ...props }) => {
   return (
     <div className="mt-16">
-      <Header title="Profile"/>
+      { !props.showHeaders ? null : <Header title="Profile"/> }
       <div className="p-20">
         <div className="font-bold text-xl text-center">
           Welcome: { user.email }

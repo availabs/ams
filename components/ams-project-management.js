@@ -45,7 +45,7 @@ export default amsProjectManagementWrapper(({ groups, project, requests, users, 
 
   return (
     <div className="mt-16">
-      <Header title="Project Management"/>
+      { !props.showHeaders ? null : <Header title="Project Management"/> }
       <div className="py-20">
 
         <Requests requests={ requests } groups={ groupsInProject } { ...props }/>

@@ -36,11 +36,11 @@ const NoAuthority = () => (
   </div>
 );
 
-const Directory = ({ pathname, children, user, ...props }) => {
+const Directory = ({ pathname, children, user, showHeaders, ...props }) => {
   const theme = useTheme();
   return (
     <div className="mt-16">
-      <Header title="Directory"/>
+      { !showHeaders ? null : <Header title="Directory"/> }
       <div className="py-20">
         <div className="inline-block">
           { React.Children.toArray(children)
@@ -81,7 +81,7 @@ const Directory = ({ pathname, children, user, ...props }) => {
 }
 
 export default Component => {
-  const AmsManager = ({ params = {}, children, ...props }) => {
+  const AmsManager = ({ params = {}, children, showHeaders = true, ...props }) => {
     const { action } = params,
       location = useLocation(),
       { pathname } = location;
@@ -92,14 +92,14 @@ export default Component => {
       .filter(({ props }) => !("amsAction" in props) || (props.amsAction === action))
       .map(child => {
         requiredAuth = Math.max(requiredAuth, get(child, ["props", "authLevel"], -1));
-        return React.cloneElement(child, { ...props, ...params, location, project: PROJECT_NAME });
+        return React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME });
       });
 
     if (!action) {
       Children = [
         ...React.Children.toArray(children)
           .filter(({ props }) => !("amsAction" in props) || (props.amsAction === action)),
-        <Directory pathname={ pathname } key="directory" { ...props } { ...params }>
+        <Directory pathname={ pathname } showHeaders={ showHeaders } key="directory" { ...props } { ...params }>
           { children }
         </Directory>
       ];
@@ -107,13 +107,13 @@ export default Component => {
     else if (!props.user.authed && (requiredAuth > -1)) {
       Children = React.Children.toArray(children)
         .filter(({ props }) => !("amsAction" in props) || (props.amsAction === "login"))
-        .map(child => React.cloneElement(child, { ...props, ...params, location, project: PROJECT_NAME }));
+        .map(child => React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME }));
     }
     else if (props.user.authed && (props.user.authLevel < requiredAuth)) {
       Children = [
         ...React.Children.toArray(children)
           .filter(({ props }) => !("amsAction" in props))
-          .map(child => React.cloneElement(child, { ...props, ...params, location, project: PROJECT_NAME })),
+          .map(child => React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME })),
         <NoAuthority key="no-auth"/>
       ];
     }
@@ -122,7 +122,7 @@ export default Component => {
       Children = <NoChild />
     }
 
-    return <Component { ...props } { ...params } project={ PROJECT_NAME }>{ Children }</Component>;
+    return <Component { ...props } { ...params } showHeaders={ showHeaders } project={ PROJECT_NAME }>{ Children }</Component>;
   }
   return AmsManager;
 }
