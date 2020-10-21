@@ -8,7 +8,8 @@ export default Component =>
   class LoginWrapper extends React.Component {
     static defaultProps = {
       amsAction: "login",
-      redirectTo: "/"
+      redirectTo: "/",
+      showIfLoggedIn: false
     }
     state = {
       email: "",

@@ -7,7 +7,8 @@ export default Component =>
     static defaultProps = {
       amsAction: "signup",
       addToGroup: false,
-      redirectTo: "/"
+      redirectTo: "/",
+      showIfLoggedIn: false
     }
     state = {
       email: "",

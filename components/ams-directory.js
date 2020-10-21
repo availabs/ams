@@ -20,8 +20,9 @@ export default wrapper(({ path, children, user, showHeaders, className="mt-16", 
           { React.Children.toArray(children)
               .reduce((accum, child) => {
                 const showInDirectory = get(child, ["props", "showInDirectory"], true),
+                  showIfLoggedIn = get(child, ["props", "showIfLoggedIn"], true),
                   amsAction = get(child, ["props", "amsAction"]);
-                if (amsAction && showInDirectory) {
+                if (amsAction && showInDirectory && (!user.authed || (user.authed && showIfLoggedIn))) {
                   const authLevel = get(child, ["props", "authLevel"], -1);
                   if (user.authLevel >= authLevel) {
                     accum.push(
