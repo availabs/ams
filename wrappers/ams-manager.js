@@ -36,10 +36,10 @@ const NoAuthority = () => (
   </div>
 );
 
-const Directory = ({ pathname, children, user, showHeaders, ...props }) => {
+const Directory = ({ pathname, children, user, showHeaders, className = "mt-16", ...props }) => {
   const theme = useTheme();
   return (
-    <div className="mt-16">
+    <div className={ className }>
       { !showHeaders ? null : <Header title="Directory"/> }
       <div className="py-20">
         <div className="inline-block">
@@ -81,7 +81,7 @@ const Directory = ({ pathname, children, user, showHeaders, ...props }) => {
 }
 
 export default Component => {
-  const AmsManager = ({ params = {}, children, showHeaders = true, ...props }) => {
+  const AmsManager = ({ params = {}, children, showHeaders = true, className, ...props }) => {
     const { action } = params,
       location = useLocation(),
       { pathname } = location;
@@ -99,7 +99,8 @@ export default Component => {
       Children = [
         ...React.Children.toArray(children)
           .filter(({ props }) => !("amsAction" in props) || (props.amsAction === action)),
-        <Directory pathname={ pathname } showHeaders={ showHeaders } key="directory" { ...props } { ...params }>
+        <Directory key="directory" pathname={ pathname } showHeaders={ showHeaders }
+          { ...props } { ...params } className={ className }>
           { children }
         </Directory>
       ];

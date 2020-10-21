@@ -20,7 +20,7 @@ const CreateGroup = ({ createAndAssign, ...props }) =>
   <GroupBase title="Create Group" { ...props } action="create"
     onClick={ createAndAssign }/>
 
-export default amsProjectManagementWrapper(({ groups, project, requests, users, ...props }) => {
+export default amsProjectManagementWrapper(({ groups, project, requests, users, className = "mt-16", ...props }) => {
 
   const [groupsInProject, otherGroups] = groups.reduce(([a1, a2], c) => {
     if (c.projects.reduce((a, c) => a || c.project_name === project, false)) {
@@ -44,7 +44,7 @@ export default amsProjectManagementWrapper(({ groups, project, requests, users, 
   const [groupSearch, setGroupSearch] = React.useState("");
 
   return (
-    <div className="mt-16">
+    <div className={ className }>
       { !props.showHeaders ? null : <Header title="Project Management"/> }
       <div className="py-20">
 
