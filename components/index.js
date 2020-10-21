@@ -8,6 +8,7 @@ import amsProfile from "./ams-profile"
 import amsVerifyEmail from "./ams-verify-email"
 import amsSetPassword from "./ams-set-password"
 import amsAcceptInvite from "./ams-accept-invite"
+import amsDirectory from "./ams-directory"
 
 export default {
   "ams-login": amsLogin,
@@ -19,5 +20,6 @@ export default {
   "ams-profile": amsProfile,
   "ams-verify-email": amsVerifyEmail,
   "ams-set-password": amsSetPassword,
-  "ams-accept-invite": amsAcceptInvite
+  "ams-accept-invite": amsAcceptInvite,
+  "ams-directory": amsDirectory
 }

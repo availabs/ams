@@ -2,7 +2,7 @@ import React from "react"
 
 import { PROJECT_NAME } from "config"
 
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useParams, useRouteMatch } from "react-router-dom"
 
 import Header from "components/avl-components/components/Header/HeaderComponent"
 import { useTheme } from "components/avl-components/wrappers/with-theme"
@@ -36,55 +36,10 @@ const NoAuthority = () => (
   </div>
 );
 
-const Directory = ({ pathname, children, user, showHeaders, className = "mt-16", ...props }) => {
-  const theme = useTheme();
-  return (
-    <div className={ className }>
-      { !showHeaders ? null : <Header title="Directory"/> }
-      <div className="py-20">
-        <div className="inline-block">
-          { React.Children.toArray(children)
-              .reduce((accum, child) => {
-                const showInDirectory = get(child, ["props", "showInDirectory"], true),
-                  amsAction = get(child, ["props", "amsAction"]);
-                if (amsAction && showInDirectory) {
-                  const authLevel = get(child, ["props", "authLevel"], -1);
-                  if (user.authLevel >= authLevel) {
-                    accum.push(
-                      <Link key={ child.props.amsAction }
-                        to={ `${ pathname }/${ child.props.amsAction }` }>
-                        <div className={ `py-1 px-2 rounded hover:${ theme.accent1 }` }>
-                          { child.props.amsAction }
-                        </div>
-                      </Link>
-                    )
-                  }
-                  else {
-                    accum.push(
-                      <div key={ child.props.amsAction }
-                        className={ `py-1 px-2 cursor-not-allowed line-through rounded hover:${ theme.accent1 }` }>
-                        { child.props.amsAction }
-                      </div>
-                    )
-                  }
-                }
-                else if (!amsAction) {
-                  accum.push(child);
-                }
-                return accum;
-              }, [])
-          }
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default Component => {
   const AmsManager = ({ params = {}, children, showHeaders = true, className, ...props }) => {
     const { action } = params,
-      location = useLocation(),
-      { pathname } = location;
+      location = useLocation();
 
     let requiredAuth = -1;
 
@@ -95,15 +50,18 @@ export default Component => {
         return React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME });
       });
 
-    if (!action) {
-      Children = [
-        ...React.Children.toArray(children)
-          .filter(({ props }) => !("amsAction" in props) || (props.amsAction === action)),
-        <Directory key="directory" pathname={ pathname } showHeaders={ showHeaders }
-          { ...props } { ...params } className={ className }>
-          { children }
-        </Directory>
-      ];
+    if (!action || action === "directory") {
+      Children = React.Children.toArray(children)
+        .filter(({ props }) => !("amsAction" in props) || (props.amsAction === "directory"))
+        .map(child =>
+          React.cloneElement(child, {
+            ...props, ...params,
+            location,
+            showHeaders,
+            children,
+            project: PROJECT_NAME
+          })
+        );
     }
     else if (!props.user.authed && (requiredAuth > -1)) {
       Children = React.Children.toArray(children)
@@ -123,7 +81,11 @@ export default Component => {
       Children = <NoChild />
     }
 
-    return <Component { ...props } { ...params } showHeaders={ showHeaders } project={ PROJECT_NAME }>{ Children }</Component>;
+    return (
+      <Component { ...props } { ...params } className={ className }
+        showHeaders={ showHeaders } project={ PROJECT_NAME }>
+        { Children }
+      </Component>);
   }
   return AmsManager;
 }

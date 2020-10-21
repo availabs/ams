@@ -10,8 +10,8 @@ import {
 
 const RouterContext = React.createContext({});
 
-const GetParams = ({ Component, ...others }) => {
-  return <Component { ...others } params={ { ...useParams() } }/>;
+const GetParams = ({ Component, ...props }) => {
+  return <Component { ...props } params={ { ...useParams() } }/>;
 }
 
 export default Component =>
@@ -31,10 +31,10 @@ export default Component =>
       <RouterContext.Provider value={ routerProps }>
         <Switch>
           <Route exact path={ path }>
-            <Component { ...props } { ...routerProps }/>
+            <Component { ...props } { ...routerProps } path={ path }/>
           </Route>
           <Route exact path={ [alt1, alt2] }>
-            <GetParams { ...props } { ...routerProps } Component={ Component }/>
+            <GetParams { ...props } { ...routerProps } path={ path } Component={ Component }/>
           </Route>
         </Switch>
       </RouterContext.Provider>
