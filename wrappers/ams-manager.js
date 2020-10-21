@@ -2,10 +2,7 @@ import React from "react"
 
 import { PROJECT_NAME } from "config"
 
-import { Link, useLocation  } from "react-router-dom"
-
-import Header from "components/avl-components/components/Header/HeaderComponent"
-import { useTheme } from "components/avl-components/wrappers/with-theme"
+import { Link, useLocation } from "react-router-dom"
 
 import Container from "../components/components/Container"
 

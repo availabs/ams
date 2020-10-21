@@ -42,7 +42,6 @@ export default amsProjectManagementWrapper(({ groups, project, requests, users, 
   otherGroups.sort(nameSorter);
 
   const [groupSearch, setGroupSearch] = React.useState("");
-console.log("CLASS NAME:", className)
 
   return (
     <div className={ className }>
