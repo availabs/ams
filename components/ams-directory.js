@@ -22,9 +22,9 @@ export default wrapper(({ path, children, user, showHeaders, className="mt-16", 
                 const showInDirectory = get(child, ["props", "showInDirectory"], true),
                   showIfLoggedIn = get(child, ["props", "showIfLoggedIn"], true),
                   amsAction = get(child, ["props", "amsAction"]);
-                if (amsAction && showInDirectory && (!user.authed || (user.authed && showIfLoggedIn))) {
+                if (amsAction) {
                   const authLevel = get(child, ["props", "authLevel"], -1);
-                  if (user.authLevel >= authLevel) {
+                  if ((user.authLevel >= authLevel) && showInDirectory && (!user.authed || (user.authed && showIfLoggedIn))) {
                     accum.push(
                       <Link key={ child.props.amsAction }
                         to={ `${ path }/${ child.props.amsAction }` }>
