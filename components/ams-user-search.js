@@ -3,7 +3,9 @@ import React from "react"
 import { Button } from "components/avl-components/components/Button"
 import { Input, Select } from "components/avl-components/components/Inputs"
 
-import matchSorter from 'match-sorter'
+import Border from "./components/Border"
+
+import wrapper from "../wrappers/ams-user-search"
 
 const UserInProjectHeader = () =>
   <div className="grid grid-cols-15 py-1 gap-3 font-bold">
@@ -21,14 +23,11 @@ const UserInProjectHeader = () =>
     </div>
   </div>
 
-const UserInProject = ({ project, user, groups, assignToGroup, removeFromGroup, deleteUser, ...props }) => {
+const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUser, ...props }) => {
   const [addTo, setAddTo] = React.useState(""),
     [removeFrom, setRemoveFrom] = React.useState("");
 
-  groups = groups.map(g => ({
-    ...g,
-    authLevel: g.projects.reduce((a, c) => c.project_name === project ? c.auth_level : a, -1)
-  })).sort((a, b) => {
+  groups.sort((a, b) => {
     if (a.authLevel === b.authLevel) {
       return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
     }
@@ -101,57 +100,43 @@ const UserInProject = ({ project, user, groups, assignToGroup, removeFromGroup, 
   )
 }
 
-export default ({ users, ...props }) => {
-  const [search, setSearch] = React.useState(""),
-    [amount, setAmount] = React.useState(5);
-
-  const adjustAmount = React.useCallback(inc =>
-    setAmount(amount + inc)
-  , [amount]);
-
-  const matches = matchSorter(users, search, { keys: ["email"] }),
-    remaining = Math.max(0, matches.length - amount);
-
-  return (
-    <div className="mb-5 py-2 px-4 border-2 rounded m-auto">
-      <div className={ `grid grid-cols-2 gap-x-3 gap-y-2` }>
-        <div className="col-span-1">
-          <Input placeholder="Search for a user..." showClear
-            value={ search } onChange={ setSearch }/>
-        </div>
-        <div className="col-span-1">
-          { !search ? null :
-            <div className="flex justify-center">
-              <Button className="mx-1"
-                disabled={ amount === 5 }
-                onClick={ e => adjustAmount(-5) }>
-                Show Less
-              </Button>
-              <Button className="mx-1"
-                disabled={ amount >= matches.length }
-                onClick={ e => adjustAmount(5) }>
-                Show More
-              </Button>
-            </div>
-          }
-        </div>
-          { !search ? null :
-            <div className="col-span-2">
-              <UserInProjectHeader />
-              { matches.slice(0, amount)
-                  .map(user =>
-                    <UserInProject key={ user.email } { ...props }
-                      user={ user }/>
-                  )
-              }
-            </div>
-          }
+export default wrapper(({ search, setSearch, adjustAmount, matches, remaining, ...props }) =>
+  <Border>
+    <div className={ `grid grid-cols-2 gap-x-3 gap-y-2` }>
+      <div className="col-span-1">
+        <Input placeholder="Search for a user..." showClear
+          value={ search } onChange={ setSearch }/>
       </div>
-      { !(search && remaining) ? null :
-        <div className="py-1">
-          Plus { remaining } others...
-        </div>
-      }
+      <div className="col-span-1">
+        { !search ? null :
+          <div className="flex justify-center">
+            <Button className="mx-1"
+              disabled={ matches.length <= 5 }
+              onClick={ e => adjustAmount(-5) }>
+              Show Less
+            </Button>
+            <Button className="mx-1"
+              disabled={ !remaining }
+              onClick={ e => adjustAmount(5) }>
+              Show More
+            </Button>
+          </div>
+        }
+      </div>
+        { !search ? null :
+          <div className="col-span-2">
+            <UserInProjectHeader />
+            { matches.map(user =>
+                <UserInProject key={ user.email } { ...props } user={ user }/>
+              )
+            }
+          </div>
+        }
     </div>
-  )
-}
+    { !(search && remaining) ? null :
+      <div className="py-1">
+        Plus { remaining } others...
+      </div>
+    }
+  </Border>
+)

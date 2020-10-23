@@ -100,6 +100,7 @@ export const deleteGroup = name =>
 	}
 export const createAndAssign = (group_name, auth_level) =>
 	(dispatch, getState) => {
+console.log("API:", group_name, auth_level)
 		const { token } = getState().user;
 		if (token) {
 			return postJson(`${ AUTH_HOST }/group/create/project/assign`, { token, group_name, project_name: PROJECT_NAME, auth_level })

@@ -12,6 +12,13 @@ import amsSetPassword from "./ams-set-password"
 import amsVerifyEmail from "./ams-verify-email"
 import amsAcceptInvite from "./ams-accept-invite"
 import amsDirectory from "./ams-directory"
+import amsUpdatePassword from "./ams-update-password"
+import amsRequests from "./ams-requests"
+import amsSendInvite from "./ams-send-invite"
+import amsAssignToProject from "./ams-assign-to-project"
+import amsCreateGroup from "./ams-create-group"
+
+import withAmsApi from "./with-ams-api"
 
 export default {
   "ams-manager": amsManager,
@@ -27,5 +34,12 @@ export default {
   "ams-set-password": amsSetPassword,
   "ams-verify-email": amsVerifyEmail,
   "ams-accept-invite": amsAcceptInvite,
-  "ams-directory": amsDirectory
+  "ams-directory": amsDirectory,
+  "ams-update-password": amsUpdatePassword,
+  "ams-requests": amsRequests,
+  "ams-send-invite": amsSendInvite,
+  "ams-assign-to-project": amsAssignToProject,
+  "ams-create-group": amsCreateGroup,
+
+  "with-ams-api": withAmsApi
 }

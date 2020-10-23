@@ -4,6 +4,9 @@ import { connect } from "react-redux"
 
 import * as API from "../api"
 
+export const AmsApiContext = React.createContext({ ...API });
+export const useApi = () => React.useContext(AmsApiContext);
+
 export default Component => {
   const AmsRedux = props => <Component { ...props }/>;
 

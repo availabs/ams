@@ -5,6 +5,8 @@ import { Select } from "components/avl-components/components/Inputs"
 
 import { useTheme } from "components/avl-components/wrappers/with-theme"
 
+import wrapper from "../wrappers/ams-requests"
+
 const PendingHeader = () =>
   <div className="grid grid-cols-12 gap-3 font-bold">
     <div className="col-span-3 border-b-2">
@@ -185,27 +187,12 @@ const RejectedRequests = ({ requests, ...props }) => {
   )
 }
 
-export default ({ requests, ...props }) => {
-  const [open, setOpen] = React.useState(false);
+export default wrapper(({ pending, awaiting, rejected, ...props }) => {
+  const [open, setOpen] = React.useState(false),
+    stop = React.useCallback(e => e.stopPropagation(), []),
+    theme = useTheme();
 
-  const stop = React.useCallback(e => e.stopPropagation(), []);
-
-  const [pending, awaiting, rejected] = requests.reduce(([a1, a2, a3], c) => {
-    if (c.state === 'pending') {
-      a1.push(c);
-    }
-    else if (c.state === 'awaiting') {
-      a2.push(c);
-    }
-    else if (c.state === 'rejected') {
-      a3.push(c);
-    }
-    return [a1, a2, a3];
-  }, [[], [], []]);
-
-  const theme = useTheme();
-
-  return !requests.length ? null : (
+  return (
     <div className={ `
         mb-5 py-2 px-4 border-2 rounded
         ${ open ? theme.accent1 : "cursor-pointer" }
@@ -229,4 +216,4 @@ export default ({ requests, ...props }) => {
       }
     </div>
   )
-}
+})

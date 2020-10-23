@@ -44,7 +44,12 @@ export default Component => {
       .filter(({ props }) => !("amsAction" in props) || (props.amsAction === action))
       .map(child => {
         requiredAuth = Math.max(requiredAuth, get(child, ["props", "authLevel"], -1));
-        return React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME });
+        return React.cloneElement(child, {
+          ...props, ...params,
+          location,
+          showHeaders: get(child, ["props", "showHeaders"], showHeaders),
+          project: PROJECT_NAME
+        });
       });
 
     if (!action || action === "directory") {
@@ -54,7 +59,7 @@ export default Component => {
           React.cloneElement(child, {
             ...props, ...params,
             location,
-            showHeaders,
+            showHeaders: get(child, ["props", "showHeaders"], showHeaders),
             children,
             project: PROJECT_NAME
           })
@@ -63,13 +68,23 @@ export default Component => {
     else if (!props.user.authed && (requiredAuth > -1)) {
       Children = React.Children.toArray(children)
         .filter(({ props }) => !("amsAction" in props) || (props.amsAction === "login"))
-        .map(child => React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME }));
+        .map(child => React.cloneElement(child, {
+          ...props, ...params,
+          location,
+          showHeaders: get(child, ["props", "showHeaders"], showHeaders),
+          project: PROJECT_NAME
+        }));
     }
     else if (props.user.authed && (props.user.authLevel < requiredAuth)) {
       Children = [
         ...React.Children.toArray(children)
           .filter(({ props }) => !("amsAction" in props))
-          .map(child => React.cloneElement(child, { ...props, ...params, location, showHeaders, project: PROJECT_NAME })),
+          .map(child => React.cloneElement(child, {
+            ...props, ...params,
+            location,
+            showHeaders: get(child, ["props", "showHeaders"], showHeaders),
+            project: PROJECT_NAME
+          })),
         <NoAuthority key="no-auth"/>
       ];
     }

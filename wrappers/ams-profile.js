@@ -7,6 +7,13 @@ export default Component =>
       authLevel: 0
     }
     render() {
-      return <Component { ...this.props }/>;
+      const { children, ...props } = this.props;
+      return (
+        <Component { ...props }>
+          { React.Children.toArray(children)
+              .map(child => React.cloneElement(child, props))
+          }
+        </Component>
+      );
     }
   }

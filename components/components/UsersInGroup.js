@@ -1,9 +1,7 @@
 import React from "react"
 
 import { Button } from "components/avl-components/components/Button"
-import { Input/*, Select*/ } from "components/avl-components/components/Inputs"
-
-// import get from "lodash.get"
+import { Input } from "components/avl-components/components/Inputs"
 
 import matchSorter from 'match-sorter'
 
@@ -60,10 +58,7 @@ const UserNotInGroup = ({ group, user, assignToGroup, ...props }) => {
   )
 }
 
-export default ({ group, usersForGroup, users, user, ...props }) => {
-  // React.useEffect(() => {
-  //   usersForGroup(group.name);
-  // }, [usersForGroup, group.name]);
+export default ({ group, users, ...props }) => {
   const [num, setNum] = React.useState(5),
     [userSearch, setUserSearch] = React.useState(""),
     [otherUserSearch, setOtherUserSearch] = React.useState(""),
