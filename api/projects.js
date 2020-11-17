@@ -1,4 +1,4 @@
-import { sendSystemMessage } from 'components/avl-components/messages/reducer';
+import { sendSystemMessage } from "@availabs/avl-components";
 
 import { AUTH_HOST } from 'config';
 

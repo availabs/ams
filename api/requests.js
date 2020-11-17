@@ -1,4 +1,4 @@
-import { sendSystemMessage } from 'components/avl-components/messages/reducer';
+import { sendSystemMessage } from "@availabs/avl-components";
 import { getUsers } from "./users"
 import { receiveAuthResponse } from "./auth"
 

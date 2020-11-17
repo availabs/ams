@@ -1,6 +1,5 @@
 import { auth } from "./auth"
-import { sendSystemMessage } from 'components/avl-components/messages/reducer';
-// import { getRequests } from "./requests.module"
+import { sendSystemMessage } from "@availabs/avl-components";
 
 import { AUTH_HOST/*, PROJECT_NAME*/ } from 'config';
 

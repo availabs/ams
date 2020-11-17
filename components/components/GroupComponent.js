@@ -1,9 +1,6 @@
 import React from "react"
 
-import { Button } from "components/avl-components/components/Button"
-import { Input/*, Select*/ } from "components/avl-components/components/Inputs"
-
-import { useTheme } from "components/avl-components/wrappers/with-theme"
+import { Button, Input, useTheme } from "@availabs/avl-components"
 
 import UsersInGroup from "./UsersInGroup"
 
@@ -53,7 +50,10 @@ export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProjec
       <div className="grid grid-cols-12 gap-3">
 
         <div className="col-span-4 flex items-center">
-          <div className="w-6 cursor-pointer" onClick={ toggle }>
+          <div className={ `
+              px-2 py-1 mr-1 cursor-pointer rounded flex justify-center
+              hover:${ theme.accent2 } ${ theme.transition }
+            ` } onClick={ toggle }>
             { opened ?
               <span className="fa fa-minus"/> :
               <span className="fa fa-plus"/>
@@ -95,7 +95,7 @@ export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProjec
 
       </div>
       { !opened ? null :
-        <div className="mx-10 my-2">
+        <div className="mx-10 mt-2">
           <UsersInGroup group={ group } { ...props }/>
         </div>
       }

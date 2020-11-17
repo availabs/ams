@@ -1,7 +1,6 @@
 import React from "react"
 
-import { Button } from "components/avl-components/components/Button"
-import { Input } from "components/avl-components/components/Inputs"
+import { Button, Input } from "@availabs/avl-components"
 
 import Container from "./components/Container"
 

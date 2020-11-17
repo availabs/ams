@@ -1,7 +1,6 @@
 import React from "react"
 
-import { Button } from "components/avl-components/components/Button"
-import { Input, Select } from "components/avl-components/components/Inputs"
+import { Button, Input, Select } from "@availabs/avl-components"
 
 import Border from "./components/Border"
 

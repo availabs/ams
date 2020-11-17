@@ -2,11 +2,9 @@ import React from "react"
 
 import { Link } from "react-router-dom"
 
-import Header from "components/avl-components/components/Header/HeaderComponent"
+import { Header, useTheme } from "@availabs/avl-components"
 
 import wrapper from "../wrappers/ams-directory"
-
-import { useTheme } from "components/avl-components/wrappers/with-theme"
 
 import get from "lodash.get"
 

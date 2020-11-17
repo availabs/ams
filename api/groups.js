@@ -1,6 +1,6 @@
 import { auth } from "./auth"
 import { getUsers } from "./users"
-import { sendSystemMessage } from 'components/avl-components/messages/reducer';
+import { sendSystemMessage } from "@availabs/avl-components";
 
 import { postJson } from "./utils"
 

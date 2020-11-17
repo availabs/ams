@@ -1,9 +1,6 @@
 import React from "react"
 
-import { Button } from "components/avl-components/components/Button"
-import { Select } from "components/avl-components/components/Inputs"
-
-import { useTheme } from "components/avl-components/wrappers/with-theme"
+import { Button, Select, useTheme } from "@availabs/avl-components"
 
 import wrapper from "../wrappers/ams-requests"
 

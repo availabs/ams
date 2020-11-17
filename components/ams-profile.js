@@ -1,6 +1,6 @@
 import React from "react"
 
-import Header from "components/avl-components/components/Header/HeaderComponent"
+import { Header } from "@availabs/avl-components"
 
 const AmsProfile = ({ user, className= "mt-16", children, showHeaders, ...props }) =>
   <div className={ className }>
