@@ -1,6 +1,6 @@
 import React from "react"
 
-import { PROJECT_NAME } from "config"
+import { Config } from "../api/utils"
 
 import { Link, useLocation } from "react-router-dom"
 
@@ -48,7 +48,7 @@ export default Component => {
           ...props, ...params,
           location,
           showHeaders: get(child, ["props", "showHeaders"], showHeaders),
-          project: PROJECT_NAME
+          project: Config.PROJECT_NAME
         });
       });
 
@@ -61,7 +61,7 @@ export default Component => {
             location,
             showHeaders: get(child, ["props", "showHeaders"], showHeaders),
             children,
-            project: PROJECT_NAME
+            project: Config.PROJECT_NAME
           })
         );
     }
@@ -72,7 +72,7 @@ export default Component => {
           ...props, ...params,
           location,
           showHeaders: get(child, ["props", "showHeaders"], showHeaders),
-          project: PROJECT_NAME
+          project: Config.PROJECT_NAME
         }));
     }
     else if (props.user.authed && (props.user.authLevel < requiredAuth)) {
@@ -83,7 +83,7 @@ export default Component => {
             ...props, ...params,
             location,
             showHeaders: get(child, ["props", "showHeaders"], showHeaders),
-            project: PROJECT_NAME
+            project: Config.PROJECT_NAME
           })),
         <NoAuthority key="no-auth"/>
       ];
@@ -95,7 +95,7 @@ export default Component => {
 
     return (
       <Component { ...props } { ...params } className={ className }
-        showHeaders={ showHeaders } project={ PROJECT_NAME }>
+        showHeaders={ showHeaders } project={ Config.PROJECT_NAME }>
         { Children }
       </Component>);
   }
