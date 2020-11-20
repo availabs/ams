@@ -1,8 +1,6 @@
 import { sendSystemMessage } from "@availabs/avl-components";
 
-import { AUTH_HOST, PROJECT_NAME, CLIENT_HOST } from 'config';
-
-import { postJson } from "./utils"
+import { postJson, Config } from "./utils"
 
 export const USER_LOGIN = 'AMS::USER_LOGIN';
 export const USER_LOGOUT = 'AMS::USER_LOGOUT';
@@ -16,19 +14,19 @@ export const receiveAuthResponse = user => ({
 });
 
 export const setUserToken = user => {
-  if (localStorage) {
-    localStorage.setItem('userToken', user.token);
+  if (window.localStorage) {
+    window.localStorage.setItem('userToken', user.token);
   }
 };
 export const getUserToken = user => {
-  if (localStorage) {
-    return localStorage.getItem('userToken');
+  if (window.localStorage) {
+    return window.localStorage.getItem('userToken');
   }
   return null;
 };
 export const removeUserToken = () => {
-  if (localStorage) {
-    localStorage.removeItem('userToken');
+  if (window.localStorage) {
+    window.localStorage.removeItem('userToken');
   }
 };
 
@@ -40,6 +38,7 @@ export const isAuthenticating = () => ({
 })
 
 export const login = (email, password) => dispatch => {
+  const { AUTH_HOST, PROJECT_NAME } = Config();
   dispatch(isAuthenticating());
   return postJson(`${ AUTH_HOST }/login`, { email, password, project: PROJECT_NAME })
     .then(res => {
@@ -60,7 +59,9 @@ export const login = (email, password) => dispatch => {
 export const auth = (token = getUserToken()) => dispatch => {
   if (token) {
     dispatch(isAuthenticating());
-    return postJson(`${ AUTH_HOST }/auth`, { token, project: PROJECT_NAME })
+    return postJson(`${ Config.AUTH_HOST }/auth`, {
+        token, project: Config.PROJECT_NAME
+      })
       .then(res => {
         if (res.error) {
           dispatch({ type: AUTH_FAILURE });
@@ -82,7 +83,7 @@ export const updatePassword = (current, password) =>
   (dispatch, getState) => {
     const { token } = getState().user;
     if (token) {
-      return postJson(`${ AUTH_HOST }/password/update`, { token, current, password })
+      return postJson(`${ Config.AUTH_HOST }/password/update`, { token, current, password })
         .then(res => {
           if (res.error) {
             return dispatch(sendSystemMessage(res.error));
@@ -99,8 +100,11 @@ export const updatePassword = (current, password) =>
     return Promise.resolve();
   }
 
-export const setPassword = (token, password) => dispatch =>
-  postJson(`${ AUTH_HOST }/password/set`, { token, password, host: CLIENT_HOST, url: "/auth/set-passord" })
+export const setPassword = (token, password) => dispatch => {
+  const { AUTH_HOST, CLIENT_HOST } = Config();
+  return postJson(`${ AUTH_HOST }/password/set`, {
+      token, password, host: CLIENT_HOST, url: "/auth/set-passord"
+    })
     .then(res => {
       if (res.error) {
         dispatch(sendSystemMessage(res.error));
@@ -112,9 +116,11 @@ export const setPassword = (token, password) => dispatch =>
         return dispatch(auth(res.token));
       }
     });
+}
 
-export const resetPassword = email => dispatch =>
-  postJson(`${ AUTH_HOST }/password/reset`, {
+export const resetPassword = email => dispatch => {
+  const { AUTH_HOST, PROJECT_NAME, CLIENT_HOST } = Config();
+  return postJson(`${ AUTH_HOST }/password/reset`, {
       email, project_name: PROJECT_NAME,
       host: CLIENT_HOST, url: "/auth/set-password"
     })
@@ -125,3 +131,4 @@ export const resetPassword = email => dispatch =>
         dispatch(sendSystemMessage(res.message));
       }
     });
+}

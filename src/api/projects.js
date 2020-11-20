@@ -1,8 +1,6 @@
 import { sendSystemMessage } from "@availabs/avl-components";
 
-import { AUTH_HOST } from 'config';
-
-import { postJson } from "./utils"
+import { postJson, Config } from "./utils"
 
 export const GET_PROJECTS = "AMS::GET_PROJECTS";
 
@@ -10,7 +8,7 @@ export const getProjects = () =>
   (dispatch, getState) => {
     const { token } = getState().user;
     if (token) {
-      postJson(`${ AUTH_HOST }/projects`, { token })
+      postJson(`${ Config.AUTH_HOST }/projects`, { token })
         .then(res => {
           if (res.error) {
               dispatch(sendSystemMessage(res.error));
@@ -32,7 +30,7 @@ export const createProject = name =>
   (dispatch, getState) => {
     const { token } = getState().user;
     if (token) {
-      postJson("/project/create", { token, name })
+      postJson(`${ Config.AUTH_HOST }/project/create`, { token, name })
         .then(res => {
           if (res.error) {
               dispatch(sendSystemMessage(res.error));
@@ -51,7 +49,7 @@ export const deleteProject = name =>
   (dispatch, getState) => {
     const { token } = getState().user;
     if (token) {
-      postJson("/project/delete", { token, name })
+      postJson(`${ Config.AUTH_HOST }/project/delete`, { token, name })
         .then(res => {
           if (res.error) {
               dispatch(sendSystemMessage(res.error));

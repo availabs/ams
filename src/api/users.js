@@ -1,9 +1,7 @@
 import { auth } from "./auth"
 import { sendSystemMessage } from "@availabs/avl-components";
 
-import { AUTH_HOST/*, PROJECT_NAME*/ } from 'config';
-
-import { postJson } from "./utils"
+import { postJson, Config } from "./utils"
 
 export const GET_USERS = "AMS::GET_USERS";
 export const USERS_IN_GROUPS = "AMS::USERS_IN_GROUPS";
@@ -12,7 +10,7 @@ export const getUsers = () =>
 	(dispatch, getState) => {
 		const { token } = getState().user;
 		if (token) {
-			return postJson(`${ AUTH_HOST }/users`, { token })
+			return postJson(`${ Config.AUTH_HOST }/users`, { token })
 				.then(res => {
 					if (res.error) {
 						dispatch(sendSystemMessage(res.error));
@@ -31,7 +29,7 @@ export const usersForGroup = group =>
 	(dispatch, getState) => {
 		const { token } = getState().user;
 		if (token) {
-			return postJson(`${ AUTH_HOST }/users/bygroup`, { token, groups: [group] })
+			return postJson(`${ Config.AUTH_HOST }/users/bygroup`, { token, groups: [group] })
 				.then(res => {
 					if (res.error) {
 						dispatch(sendSystemMessage(res.error));
@@ -52,7 +50,9 @@ export const assignToGroup = (user_email, group_name) =>
 	(dispatch, getState) => {
 		const { token, email } = getState().user;
 		if (token) {
-			return postJson(`${ AUTH_HOST }/user/group/assign`, { token, user_email, group_name })
+			return postJson(`${ Config.AUTH_HOST }/user/group/assign`, {
+					token, user_email, group_name
+				})
 				.then(res => {
 					if (res.error) {
 						return dispatch(sendSystemMessage(res.error));
@@ -78,7 +78,9 @@ export const removeFromGroup = (user_email, group_name) =>
 	(dispatch, getState) => {
 		const { token, email } = getState().user;
 		if (token) {
-			return postJson(`${ AUTH_HOST }/user/group/remove`, { token, user_email, group_name })
+			return postJson(`${ Config.AUTH_HOST }/user/group/remove`, {
+					token, user_email, group_name
+				})
 				.then(res => {
 					if (res.error) {
 						dispatch(sendSystemMessage(res.error));
@@ -105,7 +107,7 @@ export const deleteUser = user_email =>
 	(dispatch, getState) => {
 		const { token } = getState().user;
 		if (token) {
-			return postJson(`${ AUTH_HOST }/user/delete`, { token, user_email })
+			return postJson(`${ Config.AUTH_HOST }/user/delete`, { token, user_email })
 				.then(res => {
 					if (res.error) {
 						dispatch(sendSystemMessage(res.error))
@@ -127,7 +129,7 @@ export const createFake = () =>
 	(dispatch, getState) => {
   	const { token } = getState().user;
   	if (token) {
-  		return postJson(`${ AUTH_HOST }/user/create/fake`, { token })
+  		return postJson(`${ Config.AUTH_HOST }/user/create/fake`, { token })
   			.then(res => {
   				if (res.error) {
   					dispatch(sendSystemMessage(res.error));

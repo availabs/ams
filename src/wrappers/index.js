@@ -20,6 +20,9 @@ import amsCreateGroup from "./ams-create-group"
 
 import withAmsApi from "./with-ams-api"
 
+export { default as enableAuth } from "./enable-auth"
+export { amsManager }
+
 export default {
   "ams-manager": amsManager,
   "ams-redux": amsRedux,
