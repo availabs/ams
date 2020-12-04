@@ -15,12 +15,14 @@ export default loginWrapper(({ email, password, update, canSubmit, handleSubmit 
         <div className="my-2">
           <label htmlFor="email" className="block font-bold">Email</label>
           <Input type="email" id="email" required autoFocus value={ email }
-            onChange={ v => update({ email: v }) }/>
+            onChange={ v => update({ email: v }) }
+            placeholder="Enter email..."/>
         </div>
         <div className="my-2">
           <label htmlFor="password" className="block font-bold">Password</label>
           <Input type="password" id="password" required value={ password }
-            onChange={ v => update({ password: v }) }/>
+            onChange={ v => update({ password: v }) }
+            placeholder="Enter password..."/>
         </div>
         <div className="my-2">
           <Button disabled={ !canSubmit } type="submit"

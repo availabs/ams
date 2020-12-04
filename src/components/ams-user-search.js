@@ -55,7 +55,7 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
 
   return (
     <div className="grid grid-cols-15 py-1 gap-3">
-      <div className="col-span-5 whitespace-no-wrap overflow-hidden flex items-center">
+      <div className="col-span-5 whitespace-nowrap overflow-hidden flex items-center">
         { user.email }
       </div>
       <div className="col-span-4">
