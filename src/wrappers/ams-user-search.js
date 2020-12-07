@@ -1,6 +1,6 @@
 import React from "react"
 
-import matchSorter from 'match-sorter'
+import { matchSorter } from 'match-sorter'
 
 export default Component =>
   class Wrapper extends React.Component {

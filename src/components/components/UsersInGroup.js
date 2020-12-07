@@ -2,7 +2,7 @@ import React from "react"
 
 import { Button, Input } from "@availabs/avl-components"
 
-import matchSorter from 'match-sorter'
+import { matchSorter } from 'match-sorter'
 
 const UserHeader = ({ value, onChange, ...props }) =>
   <div className="grid grid-cols-9 font-bold gap-3">
