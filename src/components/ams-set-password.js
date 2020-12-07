@@ -7,7 +7,7 @@ import Container from "./components/Container"
 import wrapper from "../wrappers/ams-set-password"
 
 export default wrapper(({ password, verify, update, canSubmit, handleSubmit }) =>
-  <div className="h-screen flex items-center justify-center">
+  <div className="h-full flex-1 flex items-center justify-center">
     <Container title="Set Password">
       <form onSubmit={ handleSubmit }>
         <div className="my-2">
