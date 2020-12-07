@@ -7,7 +7,7 @@ import Container from "./components/Container"
 import wrapper from "../wrappers/ams-verify-request"
 
 export default wrapper(({ password, verify, update, canSubmit, handleSubmit, ...props }) =>
-  <div className="h-screen flex items-center justify-center">
+  <div className="h-full flex-1 flex items-center justify-center">
     <Container title="Verify Request">
       <form onSubmit={ handleSubmit }>
         <div className="my-2">

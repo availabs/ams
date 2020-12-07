@@ -2,17 +2,16 @@ import React from "react"
 
 import { Link } from "react-router-dom"
 
-import { Header, useTheme } from "@availabs/avl-components"
+import { useTheme } from "@availabs/avl-components"
 
 import wrapper from "../wrappers/ams-directory"
 
 import get from "lodash.get"
 
-export default wrapper(({ path, children, user, showHeaders, className="mt-16", ...props }) => {
+export default wrapper(({ path, children, user, className="mt-16", ...props }) => {
   const theme = useTheme();
   return (
     <div className={ className }>
-      { !showHeaders ? null : <Header title="Directory"/> }
       <div className="py-20">
         <div className="inline-block">
           { React.Children.toArray(children)

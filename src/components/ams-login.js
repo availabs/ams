@@ -9,7 +9,7 @@ import Container from "./components/Container"
 import loginWrapper from "../wrappers/ams-login"
 
 export default loginWrapper(({ email, password, update, canSubmit, handleSubmit }) =>
-  <div className="h-screen flex items-center justify-center">
+  <div className="h-full flex-1 flex items-center justify-center">
     <Container title="Login">
       <form onSubmit={ handleSubmit }>
         <div className="my-2">
