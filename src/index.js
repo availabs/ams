@@ -13,4 +13,5 @@ const Components = {
 export { Components }
 export { default as Wrappers } from "./wrappers"
 export { default as Reducers } from "./reducers"
-export { enableAuth } from "./wrappers"
+
+export { enableAuth, useAuth } from "./wrappers"

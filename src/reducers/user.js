@@ -8,7 +8,7 @@ import {
   removeUserToken
 } from "../api/auth"
 
-const getInitialState = () => ({
+export const defaultUserState = () => ({
   token: null,
   groups: [],
   authLevel: -1,
@@ -19,7 +19,7 @@ const getInitialState = () => ({
   isAuthenticating: false
 });
 
-export default (state = getInitialState(), action) => {
+export default (state = defaultUserState(), action) => {
   switch (action.type) {
     case IS_AUTHENTICATING: {
       return { ...state, isAuthenticating: true };
@@ -35,13 +35,13 @@ export default (state = getInitialState(), action) => {
     }
     case AUTH_FAILURE: {
       removeUserToken();
-      const newState = getInitialState();
+      const newState = defaultUserState();
       ++newState.attempts;
       return newState;
     }
     case USER_LOGOUT: {
       removeUserToken();
-      return getInitialState();
+      return defaultUserState();
     }
     default:
       return state;
