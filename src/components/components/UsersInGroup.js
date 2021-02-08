@@ -21,35 +21,35 @@ const UserHeader = ({ value, onChange, ...props }) =>
     </div>
   </div>
 
-const UserInGroup = ({ group, user, removeFromGroup, deleteUser, ...props }) => {
+const UserInGroup = ({ group, User, removeFromGroup, deleteUser, ...props }) => {
   return (
     <div className="grid grid-cols-9 my-1">
       <div className="col-span-4">
-        { user.email }
+        { User.email }
       </div>
       <div className="col-span-3 flex justify-center">
         <Button showConfirm
-          onClick={ e => removeFromGroup(user.email, group.name) }>
+          onClick={ e => removeFromGroup(User.email, group.name) }>
           remove
         </Button>
       </div>
       <div className="col-span-2 flex justify-center">
         <Button showConfirm buttonTheme="buttonDanger"
-          onClick={ e => deleteUser(user.email) }>
+          onClick={ e => deleteUser(User.email) }>
           delete
         </Button>
       </div>
     </div>
   )
 }
-const UserNotInGroup = ({ group, user, assignToGroup, ...props }) => {
+const UserNotInGroup = ({ group, User, assignToGroup, ...props }) => {
   return (
     <div className="grid grid-cols-12 mb-1 flex items-center">
       <div className="col-span-8">
-        { user.email }
+        { User.email }
       </div>
       <div className="col-span-4">
-        <Button onClick={ e => assignToGroup(user.email, group.name) }>
+        <Button onClick={ e => assignToGroup(User.email, group.name) }>
           add to group
         </Button>
       </div>
@@ -58,6 +58,7 @@ const UserNotInGroup = ({ group, user, assignToGroup, ...props }) => {
 }
 
 export default ({ group, users, ...props }) => {
+
   const [num, setNum] = React.useState(5),
     [userSearch, setUserSearch] = React.useState(""),
     [otherUserSearch, setOtherUserSearch] = React.useState(""),
@@ -75,6 +76,7 @@ export default ({ group, users, ...props }) => {
 
   const otherSearch = matchSorter(otherUsers, otherUserSearch, { keys: ["email"] });
 
+console.log("???", usersInGroup)
   return (
     <div>
       <div className="mb-5 grid grid-cols-3 gap-2">
@@ -108,7 +110,7 @@ export default ({ group, users, ...props }) => {
               }
               { otherSearch.slice(0, num)
                   .map(u =>
-                    <UserNotInGroup key={ u.email } group={ group } user={ u } { ...props }/>
+                    <UserNotInGroup { ...props } key={ u.email } group={ group } User={ u }/>
                   )
               }
               { otherSearch.length < num ? null :
@@ -121,8 +123,8 @@ export default ({ group, users, ...props }) => {
       <UserHeader onChange={ setUserSearch } value={ userSearch }/>
       { matchSorter(usersInGroup, userSearch, { keys: ["email"] })
           .map(user =>
-            <UserInGroup key={ user.email } user={ user }
-              group={ group } { ...props }>
+            <UserInGroup { ...props } key={ user.email } User={ user }
+              group={ group }>
               { user.email }
             </UserInGroup>
           )
