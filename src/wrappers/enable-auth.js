@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 
 import { auth } from '../api/auth';
 import { Config } from "../api/utils"
-import { AuthContent } from "../reducers"
 
 import get from "lodash.get"
 
