@@ -1,3 +1,4 @@
+import { auth } from "./auth"
 import { sendSystemMessage } from "@availabs/avl-components";
 import { getUsers } from "./users"
 import { receiveAuthResponse } from "./auth"
@@ -113,7 +114,8 @@ export const deleteRequest = request =>
         })
         .then(res => {
           if (res.error) {
-              dispatch(sendSystemMessage(res.error));
+            dispatch(auth());
+            dispatch(sendSystemMessage(res.error));
           }
           else {
             dispatch(getRequests());
@@ -137,7 +139,8 @@ export const sendInvite = (user_email, group_name) =>
         url: "/auth/accept-invite"
       }).then(res => {
         if (res.error) {
-            dispatch(sendSystemMessage(res.error));
+          dispatch(auth());
+          dispatch(sendSystemMessage(res.error));
         }
         else {
           dispatch(getRequests());
@@ -151,6 +154,7 @@ export const acceptInvite = (token, password) => dispatch =>
   postJson(`${ Config.AUTH_HOST }/invite/accept`, { token, password })
     .then(res => {
       if (res.error) {
+        dispatch(auth());
         return dispatch(sendSystemMessage(res.error, { type: 'Danger' }));
       } else {
         dispatch(sendSystemMessage(res.message));

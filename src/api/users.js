@@ -13,6 +13,7 @@ export const getUsers = () =>
 			return postJson(`${ Config.AUTH_HOST }/users`, { token })
 				.then(res => {
 					if (res.error) {
+            dispatch(auth());
 						dispatch(sendSystemMessage(res.error));
 					}
 					else {
@@ -32,6 +33,7 @@ export const usersForGroup = group =>
 			return postJson(`${ Config.AUTH_HOST }/users/bygroup`, { token, groups: [group] })
 				.then(res => {
 					if (res.error) {
+            dispatch(auth());
 						dispatch(sendSystemMessage(res.error));
 					}
 					else {
@@ -55,6 +57,7 @@ export const assignToGroup = (user_email, group_name) =>
 				})
 				.then(res => {
 					if (res.error) {
+            dispatch(auth());
 						return dispatch(sendSystemMessage(res.error));
 					}
 					else {
@@ -83,6 +86,7 @@ export const removeFromGroup = (user_email, group_name) =>
 				})
 				.then(res => {
 					if (res.error) {
+            dispatch(auth());
 						dispatch(sendSystemMessage(res.error));
 					}
 					else {
@@ -110,6 +114,7 @@ export const deleteUser = user_email =>
 			return postJson(`${ Config.AUTH_HOST }/user/delete`, { token, user_email })
 				.then(res => {
 					if (res.error) {
+            dispatch(auth());
 						dispatch(sendSystemMessage(res.error))
 					}
 					else {
@@ -132,6 +137,7 @@ export const createFake = () =>
   		return postJson(`${ Config.AUTH_HOST }/user/create/fake`, { token })
   			.then(res => {
   				if (res.error) {
+            dispatch(auth());
   					dispatch(sendSystemMessage(res.error));
   				}
   				else {
