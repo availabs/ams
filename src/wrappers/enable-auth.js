@@ -14,8 +14,8 @@ export const useAuth = () => React.useContext(AuthContext);
 
 export const enableAuth = (Component, config) => {
   Config(config);
-  const EnableAuth = ({ auth, ...props }) => {
-    React.useEffect(() => { auth(); }, [auth]);
+  const EnableAuth = ({ authFunc, ...props }) => {
+    React.useEffect(() => { authFunc(); }, [authFunc]);
     return (
       <AuthContext.Provider value={ props.user }>
         <Component { ...props }
@@ -26,5 +26,5 @@ export const enableAuth = (Component, config) => {
     )
   }
   const mapStateToProps = state => ({ user: state.user });
-  return connect(mapStateToProps, { auth })(EnableAuth);
+  return connect(mapStateToProps, { authFunc: auth })(EnableAuth);
 }

@@ -1,6 +1,6 @@
 {
   "name": "@availabs/ams",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "AVAIL Auth Management System",
   "main": "dist/index.js",
   "scripts": {
@@ -48,6 +48,7 @@
     "eslint-plugin-testing-library": "^3.9.0"
   },
   "peerDependencies": {
+    "@availabs/avl-components": "1",
     "react": "16.x || 17.x",
     "react-dom": "16.x || 17.x",
     "react-redux": "7.x"
