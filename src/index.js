@@ -15,3 +15,5 @@ export { default as Wrappers } from "./wrappers"
 export { default as Reducers } from "./reducers"
 
 export { enableAuth, useAuth } from "./wrappers"
+
+export * from "./api"
