@@ -37,10 +37,6 @@ const Reducer = (state, action) => {
   }
 }
 
-export const usePostMessage = () => {
-  return React.useReducer(Reducer, InitialState);
-}
-
 export const postMessageWrapper = Component => {
   const Wrapper = ({ getUsers,
                       getGroups,
@@ -55,7 +51,7 @@ export const postMessageWrapper = Component => {
       getGroups();
     }, []);
 
-    const [postState, dispatch] = usePostMessage(postMessage);
+    const [postState, dispatch] = React.useReducer(Reducer, InitialState);
 
     const filteredUsers = React.useMemo(() => {
 
@@ -152,3 +148,5 @@ console.log("DO POST MESSAGE:", postState)
   }
   return connect(mapStateToProps, mapDispatchToProps)(Wrapper);
 }
+
+export default postMessageWrapper;

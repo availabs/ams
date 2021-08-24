@@ -10,6 +10,7 @@ const Components = {
   ...AmsComps,
   "ams-manager": amsManager(AmsManager)
 }
+export { postMessageWrapper } from "./wrappers"
 export { Components }
 export { default as Wrappers } from "./wrappers"
 export { default as Reducers } from "./reducers"

@@ -20,6 +20,7 @@ import amsCreateGroup from "./ams-create-group"
 import amsUserPreferences from "./ams-user-preferences"
 import amsSlackPreferences from "./ams-slack-preferences"
 import amsMessages from "./ams-messages"
+import postMessageWrapper from "./ams-post-message"
 
 import withAmsApi from "./with-ams-api"
 
@@ -27,7 +28,7 @@ import withSlacker from "./with-slacker"
 import withPreferences from "./with-preferences"
 
 export { enableAuth, useAuth } from "./enable-auth"
-export { amsManager }
+export { amsManager, postMessageWrapper }
 
 export default {
   "ams-manager": amsManager,
@@ -52,6 +53,7 @@ export default {
   "ams-user-preferences": amsUserPreferences,
   "ams-slack-preferences": amsSlackPreferences,
   "ams-messages": amsMessages,
+  "ams-post-message": postMessageWrapper,
 
   "with-ams-api": withAmsApi,
   "with-preferences": withPreferences,
