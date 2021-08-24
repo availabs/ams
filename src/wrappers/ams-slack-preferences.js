@@ -3,7 +3,11 @@ import React from "react"
 import deepequal from "deep-equal"
 
 const amsSlackPreferencesWrapper = Component =>
-  ({ slacker, preferences, getSlackUserFromEmail, updateUserPreferences, ...props }) => {
+  ({ slacker, preferences, getSlackUserFromEmail, getUserPreferences, updateUserPreferences, ...props }) => {
+
+    React.useEffect(() => {
+      getUserPreferences();
+    }, [getUserPreferences]);
 
     const [newPreferences, _setNewPreferences] = React.useState(preferences),
       [slackEmail, setSlackEmail] = React.useState(null),
