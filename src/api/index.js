@@ -36,3 +36,20 @@ export {
   verifyRequest,
   acceptInvite
 } from "./requests"
+
+export {
+  getUserPreferences,
+  updateUserPreferences
+} from "./preferences"
+
+export {
+  getSlackUserFromEmail,
+  getSlackUserFromUserId
+} from "./slacker"
+
+export {
+  getMessages,
+  viewMessages,
+  deleteMessages,
+  postMessage
+} from "./messages"

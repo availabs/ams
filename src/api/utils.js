@@ -4,19 +4,25 @@ export const Config = (() => {
 		if (!arguments.length) {
 			return config;
 		}
-		config = _config;
-		Object.keys(_config).forEach(k => Configger[k] = _config[k]);
+		config = { ..._config };
+		Object.assign(Configger, _config);
 		return Configger;
 	}
 })();
 
-export const postJson = (url, body) =>
+export const postJson = (url, body, options = {}) =>
 	fetch(url, {
 		method: "POST",
     headers: {
       	Accept: 'application/json, text/plain',
-        "Content-Type": "application/json"
+        "Content-type": "application/json"
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
+		...options
 	})
-	.then(r => r.json());
+	.then(r => {
+		if (r.ok) {
+			return r.json();
+		}
+		throw new Error("There was a network problem.")
+	});

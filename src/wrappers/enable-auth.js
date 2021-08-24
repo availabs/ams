@@ -19,9 +19,7 @@ export const enableAuth = (Component, config) => {
     return (
       <AuthContext.Provider value={ props.user }>
         <Component { ...props }
-          isAuthenticating={
-            get(props, ["user", "isAuthenticating"], false)
-          }/>
+          isAuthenticating={ get(props, ["user", "isAuthenticating"], false) }/>
       </AuthContext.Provider>
     )
   }

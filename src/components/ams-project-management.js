@@ -9,6 +9,10 @@ const AmsProjectManagement = ({ children, className = "mt-16" }) =>
 
 export default ({
   type: AmsProjectManagement,
+  props: {
+    amsAction: "project-management",
+    authLevel: 5
+  },
   wrappers: ["ams-project-management"],
   children: [
     { type: "ams-requests" },

@@ -2,19 +2,21 @@ import React from "react"
 
 import { useTheme } from "@availabs/avl-components"
 
-export default ({ title, children }) => {
+export default ({ Title, children, className = "" }) => {
   const theme = useTheme();
   return (
-    <div className="flex justify-center">
-      <div className={ `
-          m-auto inline-block rounded px-20 py-10 shadow-xl
-          ${ theme.accent1 }
-        ` }>
-        { !title ? null : <div className="text-3xl font-bold">{ title }</div> }
-        <div>
-          { children }
-        </div>
-      </div>
+    <div className={ `
+      rounded p-10 shadow-xl
+      ${ theme.accent1 } ${ className }
+    ` }>
+
+      { !Title ? null :
+        typeof Title === "function" ? <Title /> :
+        <div className="text-3xl font-bold mb-2">{ Title }</div>
+      }
+
+      { children }
+
     </div>
   )
 }

@@ -53,6 +53,9 @@
   },
   "dependencies": {
     "@availabs/avl-components": "^1.0.34",
+    "d3-selection": "^3.0.0",
+    "d3-transition": "^3.0.1",
+    "deep-equal": "^2.0.5",
     "lodash.get": "4.x",
     "match-sorter": "5.x",
     "react": "^17.0.1",

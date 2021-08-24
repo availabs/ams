@@ -16,7 +16,8 @@ export const defaultUserState = () => ({
   attempts: 0,
   meta: [],
   id: null,
-  isAuthenticating: false
+  isAuthenticating: false,
+  email: null
 });
 
 export default (state = defaultUserState(), action) => {

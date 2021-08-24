@@ -17,8 +17,14 @@ import amsRequests from "./ams-requests"
 import amsSendInvite from "./ams-send-invite"
 import amsAssignToProject from "./ams-assign-to-project"
 import amsCreateGroup from "./ams-create-group"
+import amsUserPreferences from "./ams-user-preferences"
+import amsSlackPreferences from "./ams-slack-preferences"
+import amsMessages from "./ams-messages"
 
 import withAmsApi from "./with-ams-api"
+
+import withSlacker from "./with-slacker"
+import withPreferences from "./with-preferences"
 
 export { enableAuth, useAuth } from "./enable-auth"
 export { amsManager }
@@ -43,6 +49,11 @@ export default {
   "ams-send-invite": amsSendInvite,
   "ams-assign-to-project": amsAssignToProject,
   "ams-create-group": amsCreateGroup,
+  "ams-user-preferences": amsUserPreferences,
+  "ams-slack-preferences": amsSlackPreferences,
+  "ams-messages": amsMessages,
 
-  "with-ams-api": withAmsApi
+  "with-ams-api": withAmsApi,
+  "with-preferences": withPreferences,
+  "with-slacker": withSlacker
 }
