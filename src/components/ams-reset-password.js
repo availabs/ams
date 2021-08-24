@@ -10,7 +10,7 @@ import resetPasswordWrapper from "../wrappers/ams-reset-password"
 
 export default resetPasswordWrapper(({ email, verify, update, canSubmit, handleSubmit }) =>
   <div className="h-full flex-1 flex items-center justify-center">
-    <Container title="Reset Password">
+    <Container Title="Reset Password">
       <form onSubmit={ handleSubmit }>
         <div className="my-2">
           <label htmlFor="email" className="block font-bold">Email</label>

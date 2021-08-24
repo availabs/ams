@@ -10,7 +10,7 @@ import signupWrapper from "../wrappers/ams-signup"
 
 export default signupWrapper(({ email, verify, update, canSubmit, handleSubmit }) =>
   <div className="h-full flex-1 flex items-center justify-center">
-    <Container title="Signup">
+    <Container Title="Signup">
       <form onSubmit={ handleSubmit }>
         <div className="my-2">
           <label htmlFor="email" className="block font-bold">Email</label>

@@ -10,7 +10,7 @@ import loginWrapper from "../wrappers/ams-login"
 
 export default loginWrapper(({ email, password, update, canSubmit, handleSubmit }) =>
   <div className="h-full flex-1 flex items-center justify-center">
-    <Container title="Login">
+    <Container Title="Login">
       <form onSubmit={ handleSubmit }>
         <div className="my-2">
           <label htmlFor="email" className="block font-bold">Email</label>
