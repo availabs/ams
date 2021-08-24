@@ -53,7 +53,7 @@ export const postMessageWrapper = Component => {
     React.useEffect(() => {
       getUsers();
       getGroups();
-    }, []);
+    }, [getUsers, getGroups]);
 
     const [postState, dispatch] = usePostMessage(postMessage);
 
@@ -99,7 +99,7 @@ export const postMessageWrapper = Component => {
         type: "update-state",
         payload
       });
-    }, [project]);
+    }, [project, dispatch]);
 
     const canPostMessage = React.useMemo(() => {
       const {

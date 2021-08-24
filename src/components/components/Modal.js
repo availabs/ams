@@ -67,7 +67,7 @@ export const Modal = ({ show, closeModal, actions, duration, hideOnAction, child
           .style("top", `-50%`)
           .end().then(() => setClosed(!show));
     }
-  }, [outer, inner, show, closed, setClosed]);
+  }, [outer, inner, show, closed, setClosed, duration]);
 
   const theme = useTheme();
 
