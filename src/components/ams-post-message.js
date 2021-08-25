@@ -10,7 +10,6 @@ const PostMessage = ({ postState,
                         postMessage,
                         users,
                         groups,
-                        project,
                         onPostMessage, ...props }) => {
 
   const { heading, message, type, target, filterGroups } = postState;

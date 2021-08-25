@@ -42,9 +42,10 @@ export const postMessageWrapper = Component => {
                       getGroups,
                       users,
                       groups,
-                      project,
+                      projectName,
                       postMessage,
-                      sendSystemMessage, ...props }) => {
+                      sendSystemMessage,
+                      ...props }) => {
 
     React.useEffect(() => {
       getUsers();
@@ -64,7 +65,7 @@ export const postMessageWrapper = Component => {
 
       return users.filter(({ projects }) => {
         return projects.reduce((a, c) => {
-          return a || c.project_name === project;
+          return a || c.project_name === projectName;
         }, false);
       })
       .filter(({ groups }) => {
@@ -73,29 +74,29 @@ export const postMessageWrapper = Component => {
         }, !Boolean(filterGroups.length))
       })
       .sort((a, b) => a.email.localeCompare(b.email));
-    }, [users, project, postState]);
+    }, [users, projectName, postState]);
 
     const filteredGroups = React.useMemo(() => {
       return groups.filter(({ projects }) => {
         return projects.reduce((a, c) => {
-          return a || c.project_name === project;
+          return a || c.project_name === projectName;
         }, false);
       })
       .sort((a, b) => a.name.localeCompare(b.name));
-    }, [groups, project]);
+    }, [groups, projectName]);
 
     const updatePostState = React.useCallback(payload => {
       if ("type" in payload) {
         payload.target = "";
       }
       if (payload.type === "project") {
-        payload.target = project;
+        payload.target = projectName;
       }
       dispatch({
         type: "update-state",
         payload
       });
-    }, [project, dispatch]);
+    }, [projectName, dispatch]);
 
     const canPostMessage = React.useMemo(() => {
       const {
@@ -118,7 +119,6 @@ export const postMessageWrapper = Component => {
         target
       } = postState;
 
-console.log("DO POST MESSAGE:", postState)
       return postMessage(heading, message, type, target);
     }, [postMessage, postState, canPostMessage]);
 
@@ -129,15 +129,14 @@ console.log("DO POST MESSAGE:", postState)
         updatePostState={ updatePostState }
         postState={ postState }
         users={ filteredUsers }
-        groups={ filteredGroups }
-        project={ project }/>
+        groups={ filteredGroups }/>
     )
   }
   const mapStateToProps = state => ({
     messages: state.messages,
     users: state.users,
     groups: state.groups,
-    project: Config.PROJECT_NAME
+    projectName: Config.PROJECT_NAME
   })
   const mapDispatchToProps = {
     postMessage,
