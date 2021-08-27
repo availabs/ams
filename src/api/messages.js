@@ -80,13 +80,11 @@ export const deleteMessages = ids =>
   	(dispatch, getState) => {
   		const { token } = getState().user;
   		if (token) {
-console.log("POSTING MESSAGE:", heading, message, type, target);
         const { AUTH_HOST, PROJECT_NAME } = Config();
   			return postJson(`${ AUTH_HOST }/messages/post`,
             { token, heading, message, type, target, project: PROJECT_NAME }
           )
   				.then(res => {
-console.log("POST RES:", res);
   					if (res.error) {
   						dispatch(sendSystemMessage(res.error));
   					}

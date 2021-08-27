@@ -28,7 +28,7 @@ export default wrapper(({ current, password, verify, update, canSubmit, handleSu
         <div>
           <Button type="submit" buttonTheme="buttonLargePrimaryBlock"
             disabled={ !canSubmit }>
-            update
+            update password
           </Button>
         </div>
       </div>

@@ -19,6 +19,7 @@ import amsAssignToProject from "./ams-assign-to-project"
 import amsCreateGroup from "./ams-create-group"
 import amsUserPreferences from "./ams-user-preferences"
 import amsSlackPreferences from "./ams-slack-preferences"
+import amsEmailPreferences from "./ams-email-preferences"
 import amsMessages from "./ams-messages"
 import postMessageWrapper from "./ams-post-message"
 
@@ -54,6 +55,7 @@ export default {
   "ams-slack-preferences": amsSlackPreferences,
   "ams-messages": amsMessages,
   "ams-post-message": postMessageWrapper,
+  "ams-email-preferences": amsEmailPreferences,
 
   "with-ams-api": withAmsApi,
   "with-preferences": withPreferences,

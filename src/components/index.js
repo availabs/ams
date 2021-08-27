@@ -19,6 +19,7 @@ import AmsGroupsInProject from "./ams-groups-in-project"
 import AmsUserPreferences from "./ams-user-preferences"
 import AmsSlackPreferences from "./ams-slack-preferences"
 import AmsMessages from "./ams-messages"
+import AmsEmailPreferences from "./ams-email-preferences"
 
 export default {
   "ams-login": AmsLogin,
@@ -41,5 +42,6 @@ export default {
   "ams-groups-in-project": AmsGroupsInProject,
   "ams-user-preferences": AmsUserPreferences,
   "ams-slack-preferences": AmsSlackPreferences,
-  "ams-messages": AmsMessages
+  "ams-messages": AmsMessages,
+  "ams-email-preferences": AmsEmailPreferences,
 }
