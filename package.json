@@ -1,6 +1,6 @@
 {
   "name": "@availabs/ams",
-  "version": "1.0.14",
+  "version": "1.0.19",
   "description": "AVAIL Auth Management System",
   "main": "dist/index.js",
   "scripts": {
@@ -52,7 +52,7 @@
     "react-redux": "7.x"
   },
   "dependencies": {
-    "@availabs/avl-components": "^1.0.34",
+    "@availabs/avl-components": "^1.1.22",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",
     "deep-equal": "^2.0.5",
