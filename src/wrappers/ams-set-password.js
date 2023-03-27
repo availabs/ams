@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Redirect } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 export default Component =>
   class Wrapper extends React.Component {
@@ -24,7 +24,7 @@ export default Component =>
         canSubmit = password && verify && (password === verify);
 
       if (this.props.user.authed) {
-        return <Redirect to={ this.props.redirectTo }/>
+        return <Navigate to={ this.props.redirectTo }/>
       }
       return (
         <Component { ...this.state } { ...this.props }
