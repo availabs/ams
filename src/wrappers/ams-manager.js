@@ -37,7 +37,13 @@ export default Component => {
   const AmsManager = ({ params = {}, children, showHeaders = true, className, ...props }) => {
     const { action } = params,
       location = useLocation();
+  console.log('??', action, props,
+    React.Children.toArray(children),
+      // .filter(({ props }) => !("amsAction" in props) || (props.amsAction === action)),
+    React.Children.toArray(children)
+      .filter(({ props }) => !("amsAction" in props) || (props.amsAction === "login"))
 
+  )
     let requiredAuth = -1;
 
     let Children = React.Children.toArray(children)
@@ -51,7 +57,7 @@ export default Component => {
           project: Config.PROJECT_NAME
         });
       });
-
+    console.log('children -1', Children)
     if (!action || action === "directory") {
       Children = React.Children.toArray(children)
         .filter(({ props }) => !("amsAction" in props) || (props.amsAction === "directory"))
@@ -64,6 +70,7 @@ export default Component => {
             project: Config.PROJECT_NAME
           })
         );
+      console.log('children 0', Children)
     }
     else if (!props.user.authed && (requiredAuth > -1)) {
       Children = React.Children.toArray(children)
@@ -74,6 +81,7 @@ export default Component => {
           showHeaders: get(child, ["props", "showHeaders"], showHeaders),
           project: Config.PROJECT_NAME
         }));
+      console.log('children 1', Children)
     }
     else if (props.user.authed && (props.user.authLevel < requiredAuth)) {
       Children = [
@@ -87,6 +95,7 @@ export default Component => {
           })),
         <NoAuthority key="no-auth"/>
       ];
+      console.log('children 2', Children)
     }
 
     if (!Children.length) {
@@ -96,7 +105,7 @@ export default Component => {
     return (
       <Component { ...props } { ...params } className={ className }
         showHeaders={ showHeaders } project={ Config.PROJECT_NAME }>
-        { Children }
+        { Children }requiredAuth
       </Component>);
   }
   return AmsManager;

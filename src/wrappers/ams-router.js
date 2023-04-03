@@ -8,16 +8,15 @@ import {
   Routes, Route
 } from "react-router-dom"
 
-const RouterContext = React.createContext({});
-
 const GetParams = ({ Component, ...props }) => {
+  console.log('getting params', Component, props)
   return <Component { ...props } params={ { ...useParams() } }/>;
 }
 
 export default Component =>
   ({ ...props }) => {
-    const path = '/auth',
-      // { pathname: path } = useLocation(),
+
+    const { path } = useLocation(),
       alt1 = `${ path }/:action`,
       alt2 = `${ path }/:action/:urlArg`,
       location = useLocation(),
@@ -29,14 +28,21 @@ export default Component =>
         navigate
       }), [path, location, navigate]);
 
-    console.log('paths', path, alt1, alt2, useParams())
+
+    console.log('props', props)
+
+    // return (
+    //     <Routes>
+    //       <Route exact path={ path } element={<Component { ...props } { ...routerProps } path={ path }/>} />
+    //       <Route exact path={ [alt1, alt2] } element={<GetParams { ...props } { ...routerProps } path={ path } Component={ Component }/>} />
+    //     </Routes>
+    // )
     return (
-      <RouterContext.Provider value={ routerProps }>
-        <Routes>
-          <Route exact path={ path } element={<Component { ...props } { ...routerProps } path={ path }/>} />
-          <Route exact path={ alt1 } element={<GetParams { ...props } { ...routerProps } path={ alt1 } Component={ Component }/>} />
-          <Route exact path={ alt2 } element={<GetParams { ...props } { ...routerProps } path={ alt2 } Component={ Component }/>} />
-        </Routes>
-      </RouterContext.Provider>
+      <Routes>
+        <Route path={ '/auth/' } element={<Component { ...props } { ...routerProps } path={ path }/>} >
+          <Route path={ 'login' } element={<GetParams { ...props } { ...routerProps } path={ path } Component={ Component }/>} />
+        </Route>
+        {/*<Route exact path={ alt2 } element={<GetParams { ...props } { ...routerProps } path={ path } Component={ Component }/>} />*/}
+      </Routes>
     )
   }
