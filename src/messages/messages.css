@@ -20,13 +20,13 @@
 	}
 }
 
-.system-message-container {
+/*.system-message-container {
 	position: fixed;
 	z-index: 950;
 	right: 50px;
 	top: 50px;
 }
-
+*/
 .system-message {
 	position: absolute;
 	white-space: nowrap;

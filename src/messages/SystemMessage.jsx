@@ -1,5 +1,5 @@
 import React from 'react';
-import './messages.css'
+//import './messages.css'
 
 
 const Message = ({ message, top, type, show, dismiss, confirm = null }) => {
@@ -8,7 +8,7 @@ const Message = ({ message, top, type, show, dismiss, confirm = null }) => {
   }
   console.log('type', type)
   return (
-    <div className={ `bg-white system-message rounded ${ show }` }
+    <div className={ `bg-white absolute whitespace-nowrap rounded ${ show }` }
       style={ { top: `${ top }rem` } }>
       <div className={ `
           bg-opacity-25 ${ theme[`bg${ type }`] }
