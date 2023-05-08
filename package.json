@@ -48,10 +48,6 @@
     "eslint-plugin-testing-library": "^3.9.0"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
-    "@availabs/avl-components": "^1.1.23",
->>>>>>> 51b8c10bd692e0f01e71abbdd716c5fb476c0308
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",
     "lodash": "4.x",
