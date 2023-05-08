@@ -1,4 +1,4 @@
-import { sendSystemMessage } from "@availabs/avl-components";
+import { sendSystemMessage } from "../";
 
 import { Config } from "./utils"
 

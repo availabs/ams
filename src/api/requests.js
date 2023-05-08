@@ -1,5 +1,5 @@
 import { auth } from "./auth"
-import { sendSystemMessage } from "@availabs/avl-components";
+import { sendSystemMessage } from "../";
 import { getUsers } from "./users"
 import { receiveAuthResponse } from "./auth"
 

@@ -1,20 +1,21 @@
 import React from "react"
 
-import AmsComps from "./components"
-import { amsManager } from "./wrappers"
+// registers AMS pages 
+export { default as amsFactory} from './amsFactory'
 
-const AmsManager = ({ children, className = "max-w-7xl mx-auto h-full flex flex-col" }) => {
-  return <div className={ className }>{ children }</div>
-}
-const Components = {
-  ...AmsComps,
-  "ams-manager": amsManager(AmsManager)
-}
-export { postMessageWrapper } from "./wrappers"
-export { Components }
-export { default as Wrappers } from "./wrappers"
+// connect to AMS store
+export { enableAuth, useAuth, withAuth } from "./wrappers"
 export { default as Reducers } from "./reducers"
 
-export { enableAuth, useAuth } from "./wrappers"
+// Universal Message & Display
+export { default as Messages } from "./messages"
+export { default as messages } from "./messages/reducer"
+export {
+  sendSystemMessage,
+  dismissSystemMessage
+} from "./messages/reducer"
+export { postMessageWrapper } from "./wrappers"
+
+
 
 export * from "./api"

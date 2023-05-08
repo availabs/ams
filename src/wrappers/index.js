@@ -1,4 +1,3 @@
-import amsManager from "./ams-manager"
 import amsRedux from "./ams-redux"
 import amsRouter from "./ams-router"
 import amsLogin from "./ams-login"
@@ -28,11 +27,10 @@ import withAmsApi from "./with-ams-api"
 import withSlacker from "./with-slacker"
 import withPreferences from "./with-preferences"
 
-export { enableAuth, useAuth } from "./enable-auth"
-export { amsManager, postMessageWrapper }
+export { enableAuth, useAuth, withAuth } from "./enable-auth"
+export { postMessageWrapper }
 
 export default {
-  "ams-manager": amsManager,
   "ams-redux": amsRedux,
   "ams-router": amsRouter,
   "ams-login": amsLogin,
