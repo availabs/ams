@@ -1,5 +1,3 @@
-import React from "react"
-
 // registers AMS pages 
 export { default as amsFactory} from './amsFactory'
 
