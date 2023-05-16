@@ -4,7 +4,7 @@ import Container from "./components/Container"
 
 import wrapper from "../wrappers/ams-set-password"
 
-export default wrapper(({ password, verify, update, canSubmit, handleSubmit }) =>
+export default wrapper(({ password, verify, title, update, canSubmit, handleSubmit }) =>
   <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-md sm:px-10">
