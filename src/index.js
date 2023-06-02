@@ -1,3 +1,4 @@
+import wrappers from "./wrappers"
 // registers AMS pages 
 export { default as amsFactory} from './amsFactory'
 
@@ -12,7 +13,6 @@ export {
   sendSystemMessage,
   dismissSystemMessage
 } from "./messages/reducer"
-import wrappers from "./wrappers"
 
 export { wrappers }
 
