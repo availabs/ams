@@ -12,8 +12,9 @@ export {
   sendSystemMessage,
   dismissSystemMessage
 } from "./messages/reducer"
-export * from "./wrappers"
+import wrappers from "./wrappers"
 
+export { wrappers }
 
 
 export * from "./api"
