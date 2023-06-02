@@ -12,7 +12,7 @@ export {
   sendSystemMessage,
   dismissSystemMessage
 } from "./messages/reducer"
-export { postMessageWrapper } from "./wrappers"
+export * from "./wrappers"
 
 
 
