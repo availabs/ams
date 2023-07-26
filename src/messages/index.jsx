@@ -12,12 +12,14 @@ import {
 
 const SystemMessages = ({ messages, dismissSystemMessage }) =>
 	!messages.length ? null :
-	<div className='fixed z-50 top-[70px] right-[20px]'>
+	<div className='fixed z-50 top-[70px] right-[350px]'>
 		{ messages.map((message, i) =>
 				message.onConfirm ?
 					<ConfirmMessage key={ message.id } top={ i * 3 } { ...message }
 						dismissSystemMessage={ dismissSystemMessage }/> :
-					<SystemMessage className={'absolute'} key={ message.id } top={ i * 3 } { ...message }
+					<SystemMessage 
+						className={'absolute whitespace-nowrap'} 
+						key={ message.id } top={ i * 3 } { ...message }
 						dismissSystemMessage={ dismissSystemMessage }/>
 			)
 		}
