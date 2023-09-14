@@ -16,6 +16,7 @@ export default Component =>
     }
     handleSubmit(e) {
       e.preventDefault();
+      console.log('handle submit set password', this.props, this.state)
       this.props.setPassword(this.props.urlArg, this.state.password);
       this.setState({ password: "", verify: "" });
     }

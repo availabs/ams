@@ -10,6 +10,7 @@ export default function authFactory (amsConfig,dmsPath='/')  {
     return (
       <AmsManager 
         path={ `/${params['*'] || ''}` }
+        urlArg={params['*']?.split('/')?.[1] || ''}
         config={amsConfig}
       />
     )
