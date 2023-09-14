@@ -6,7 +6,7 @@ const Message = ({ message, top, type, show, dismiss, confirm = null }) => {
   const theme = {
     'bgDanger' : 'bg-red-300 border border-red-400'
   }
-  console.log('type', type)
+  console.log('type', type, top)
   return (
     <div className={ `bg-white absolute whitespace-nowrap rounded ${ show }` }
       style={ { top: `${ top }rem` } }>
