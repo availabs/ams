@@ -12,7 +12,7 @@ let childKey = 0
 
 
 function configMatcher (config, path ) {
-	
+
 	// matchRoutes picks best from all available routes in config
 
 	const matches = matchRoutes(config.map(d => ({path:d.path})), {pathname:path}) || []
@@ -39,7 +39,7 @@ function configMatcher (config, path ) {
 export function getActiveView(config, path) {
 	// add '' to params array to allow root (/) route  matching
 	let activeConfigs = configMatcher(config,path)
-	//console.log(activeConfigs)
+console.log("getActiveView", config, path, activeConfigs)
 
 	// console.log('activeConfigs', activeConfigs, path)
 	// get the component for the active config
@@ -48,11 +48,11 @@ export function getActiveView(config, path) {
 		const Comp = typeof activeConfig.type === 'function' ?
 			activeConfig.type :
 			Components[activeConfig.type] || DefaultComponent
-		
+
 		// get the wrapper for the config, or the default wrapper
 		//const Wrapper = Wrappers[activeConfig.action] || DefaultWrapper
-		
-		// if there are children 
+
+		// if there are children
 		let children = []
 		if(activeConfig.children) {
 			children = getActiveView(activeConfig.children, path,format, depth+1)
@@ -72,9 +72,9 @@ export function getActiveView(config, path) {
 
 
 export function getActiveConfig (config=[], path='/', depth = 0) {
-	
+
 	let configs = cloneDeep(configMatcher(config,path, depth))
-	
+
 	configs.forEach(out => {
 		out.children = getActiveConfig(out.children, path, depth+1)
 	})
@@ -89,11 +89,6 @@ export function validFormat(format) {
 	// ----------------------------------
 	// to do
 	// ----------------------------------
-	return format.children && Array.isArray(format.children) // lol 
+	return format.children && Array.isArray(format.children) // lol
 
 }
-
-
-
-
-

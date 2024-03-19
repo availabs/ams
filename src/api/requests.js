@@ -38,6 +38,7 @@ export const signup = (email, addToGroup = false) => dispatch =>
     host: Config.CLIENT_HOST,
     url: addToGroup ? "/auth/verify-request" : "/auth/verify-email"
   }).then(res => {
+
       if (res.error) {
         return dispatch(sendSystemMessage(res.error, { type: 'Danger' }));
       } else {
