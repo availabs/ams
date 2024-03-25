@@ -98,6 +98,9 @@ export const verifyEmail = token => dispatch =>
 export const verifyRequest = (token, password) => dispatch =>
   postJson(`${ Config.AUTH_HOST }/signup/request/verify`, { token, password })
     .then(res => {
+
+console.log("verifyRequest::res", res)
+
       if (res.error) {
         return dispatch(sendSystemMessage(res.error, { type: 'Danger' }));
       } else {

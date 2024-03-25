@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 
 import AmsManager from './ams-manager'
 
-export default function authFactory (amsConfig,dmsPath='/')  {
-  
+export default function authFactory (amsConfig,amsPath='/')  {
+
   function AMS() {
     const params = useParams();
     return (
       <AmsManager
-        path={ `/${params['*'] || ''}` }
-        urlArg={params['*']?.split('/')?.[1] || ''}
+        path={ params.action }
+        urlArg={ params.urlArg }
         config={amsConfig}
       />
     )
@@ -25,8 +25,12 @@ export default function authFactory (amsConfig,dmsPath='/')  {
     );
   }
 
-  return {
-    path: `${dmsPath}*`,
-    element: (props) =>  <AMS {...props} />
-  }
+  return [
+    { path: `${ amsPath }/:action`,
+      element: (props) =>  <AMS { ...props } />
+    },
+    { path: `${ amsPath }/:action/:urlArg`,
+      element: (props) =>  <AMS { ...props } />
+    }
+  ]
 }

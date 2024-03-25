@@ -22,7 +22,6 @@ export default Component =>
     render() {
       const { email, verify } = this.state,
         canSubmit = email && verify && (email === verify);
-
       if (this.props.user.authed) {
         return redirect(this.props.redirectTo)//<Redirect to={ this.props.redirectTo }/>
       }

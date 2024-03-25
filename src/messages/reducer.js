@@ -42,7 +42,6 @@ export const dismissSystemMessage = id =>
     )
 
 export default (state=[], action) => {
-  // console.log('message reducer' ,state, action)
   switch (action.type) {
     case SEND_SYSTEM_MESSAGE: {
       let newState = state.filter(({ id }) => id !== action.options.id);

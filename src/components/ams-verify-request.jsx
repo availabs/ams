@@ -20,10 +20,10 @@ export default wrapper(({ password, verify, update, canSubmit, handleSubmit, ...
             onChange={ v => update({ verify: v.target.value }) }/>
         </div>
         <div className="my-2">
-          <Button disabled={ !canSubmit } type="submit"
-            buttonTheme="buttonPrimaryLargeBlock">
+          <button disabled={ !canSubmit } type="submit"
+            className="block py-2 rounded bg-blue-400">
             verify
-          </Button>
+          </button>
         </div>
       </form>
     </Container>

@@ -11,35 +11,38 @@ const DefaultComponent = Components['ams-default']
 let childKey = 0
 
 
-function configMatcher (config, path ) {
+// function configMatcher (config, path ) {
+//
+// 	// matchRoutes picks best from all available routes in config
+//
+// 	const matches = matchRoutes(config.map(d => ({path:d.path})), {pathname:path}) || []
+// console.log('configMatcher', config, path, matches)
+//
+// 	// hash matches by route path
+// 	let matchHash = matches.reduce((out,c) => {
+// 		out[c.route.path] = c
+// 		return out
+// 	},{})
+//
+// 	// return fitlered configs for best matches
+// 	// and add extracted params from matchRoutes
+// 	return config.filter((d,i) => {
+// 		let match = matchHash?.[d.path] || false
+// 		if(match){
+// 			d.params = match.params
+// 		}
+// 		return match
+// 	})
+// }
 
-	// matchRoutes picks best from all available routes in config
-
-	const matches = matchRoutes(config.map(d => ({path:d.path})), {pathname:path}) || []
-	// console.log('configMatcher', config, matches, path)
-
-	// hash matches by route path
-	let matchHash = matches.reduce((out,c) => {
-		out[c.route.path] = c
-		return out
-	},{})
-
-	// return fitlered configs for best matches
-	// and add extracted params from matchRoutes
-	return config.filter((d,i) => {
-		let match = matchHash?.[d.path] || false
-		if(match){
-			d.params = match.params
-		}
-		return match
-	})
+const configMatcher = (config, path) => {
+	return config.filter(c => c.path === path);
 }
 
 
-export function getActiveView(config, path) {
+export function getActiveView(config, path, urlArg) {
 	// add '' to params array to allow root (/) route  matching
-	let activeConfigs = configMatcher(config,path)
-console.log("getActiveView", config, path, activeConfigs)
+	let activeConfigs = configMatcher(config, path)
 
 	// console.log('activeConfigs', activeConfigs, path)
 	// get the component for the active config
@@ -66,6 +69,7 @@ console.log("getActiveView", config, path, activeConfigs)
 			{...activeConfig.props}
 			children={children}
 			location={{}}
+			urlArg={ urlArg }
 		/>
 	})
 }

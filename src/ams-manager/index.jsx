@@ -8,18 +8,18 @@ import defaultTheme from '../theme/default-theme'
 const { InvalidConfig, NoRouteMatch } = comps
 
 
-const AmsManager = ({ config, path='', user={}, theme=defaultTheme, ...props}) => {
+const AmsManager = ({ config, path='', user={}, theme=defaultTheme, urlArg, ...props}) => {
 	// console.log('AmsManager', props)
-	const location = useLocation()
+	// const location = useLocation()
 	// check for valid config
 
-console.log("AmsManager", config, path)
+// console.log("AmsManager", config, path)
 
 	if(!validFormat(config)) {
 		return <InvalidConfig config={config} />
 	}
 
-	const RenderView = getActiveView(config.children, path, location)
+	const RenderView = getActiveView(config.children, path, urlArg)
 	if(!RenderView) {
 		return <NoRouteMatch path={path} />
 	}
