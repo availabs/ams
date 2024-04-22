@@ -27,7 +27,7 @@ import withAmsApi from "./with-ams-api"
 import withSlacker from "./with-slacker"
 import withPreferences from "./with-preferences"
 
-export { enableAuth, useAuth, withAuth } from "./enable-auth"
+export { enableAuth, useAuth, withAuth, authProvider } from "./enable-auth"
 export { postMessageWrapper }
 
 export default {
