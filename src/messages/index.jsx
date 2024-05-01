@@ -11,7 +11,7 @@ import {
 
 
 const SystemMessages = ({ messages, dismissSystemMessage }) =>
-	!messages.length ? null :
+	!messages?.length ? <span /> :
 	<div className='fixed z-50 top-[70px] right-[350px]'>
 		{ messages.map((message, i) =>
 				message.onConfirm ?
