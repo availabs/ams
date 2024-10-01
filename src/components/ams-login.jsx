@@ -67,12 +67,12 @@ export default loginWrapper(({ email, password, update, canSubmit, handleSubmit,
         </div>
         <div className="flex items-center justify-between px-2 py-4">
               
-          <div className="text-xs">
+          {/*<div className="text-xs">
             Need an account?&nbsp;&nbsp; 
             <Link to='/auth/register' className="font-medium text-blue-600 hover:text-blue-500">
               Register
-            </Link>
-          </div>
+            </Link> <div>Please contact Julia.mcwest@dhses.ny.gov</div>
+          </div>*/}
 
           <div className="text-xs">
             <Link to='/auth/reset-password' className="font-medium text-blue-600 hover:text-blue-500">
