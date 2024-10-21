@@ -4,6 +4,7 @@ import Border from "./components/Border"
 
 import wrapper from "../wrappers/ams-send-invite"
 
+import Select from "~/modules/avl-components/src/components/Inputs/select";
 export default wrapper(({ email, verify, group, update, canSubmit, handleSubmit, groups }) =>
   <Border>
     <div className="grid grid-cols-10 gap-1 font-bold border-b-2 mb-1">
@@ -30,15 +31,15 @@ export default wrapper(({ email, verify, group, update, canSubmit, handleSubmit,
             onChange={ v => update({ verify: v.target.value }) } value={ verify }/>
         </div>
         <div className="col-span-3">
-          {/*<Select domain={ groups } multi={ false }
+          <Select domain={ groups } multi={ false }
             accessor={ g => g.name } placeholder="Select a group..."
             listAccessor={ g => `${g.name} (auth level ${ g.authLevel })` }
-            onChange={ v => update({ group: v.target.value }) } value={ group }/>*/}
+            onChange={ v => update({ group: v }) } value={ group }/>
         </div>
         <div className="col-span-1">
-          <Button block type="submit" disabled={ !canSubmit }>
+          <button block type="submit" disabled={ !canSubmit }>
             send
-          </Button>
+          </button>
         </div>
       </div>
     </form>

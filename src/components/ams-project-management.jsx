@@ -1,25 +1,20 @@
 import React from "react"
+import wrapper from "../wrappers/ams-project-management";
 
-const AmsProjectManagement = ({ children, className = "mt-16" }) =>
-  <div className={ className }>
-    <div className="py-20">
-      { children }
-    </div>
+import AmsRequests from "./ams-requests";
+import AmsSendInvite from "./ams-send-invite";
+import AmsUserSearch from "./ams-user-search";
+import AmsAssignToProject from "./ams-assign-to-project";
+import AmsCreateGroup from "./ams-create-group";
+import AmsGroupsInProject from "./ams-groups-in-project";
+
+export default wrapper((props) => (<div className={ props.className }>
+  <div className="py-20">
+    <AmsRequests {...props} />
+    <AmsSendInvite {...props} />
+    <AmsUserSearch {...props} />
+    <AmsAssignToProject {...props} />
+    <AmsCreateGroup {...props} />
+    <AmsGroupsInProject {...props} />
   </div>
-
-export default ({
-  type: AmsProjectManagement,
-  props: {
-    amsAction: "project-management",
-    authLevel: 5
-  },
-  wrappers: ["ams-project-management"],
-  children: [
-    { type: "ams-requests" },
-    { type: "ams-send-invite" },
-    { type: "ams-user-search" },
-    { type: "ams-assign-to-project" },
-    { type: "ams-create-group" },
-    { type: "ams-groups-in-project" }
-  ]
-})
+</div>))

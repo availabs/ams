@@ -1,4 +1,5 @@
 import React from "react"
+import { Config } from "../api/utils"
 
 const nameSorter = (a, b) => (
   a.name.toLowerCase() < b.name.toLowerCase() ? -1 :
@@ -6,7 +7,8 @@ const nameSorter = (a, b) => (
 );
 
 const amsProjectManagementWrapper = Component =>
-  ({ groups = [], project, users, children, getGroups, getUsers, getRequests, ...props }) => {
+  ({ groups = [], users, children, getGroups, getUsers, getRequests, ...props }) => {
+    const project = Config.PROJECT_NAME;
     React.useEffect(() => {
       getGroups();
       getUsers();
@@ -41,7 +43,7 @@ const amsProjectManagementWrapper = Component =>
         return a;
       }, [[], []]);
     }, [users, project]);
-
+    console.log("wrapper props, project::", props, project)
     return (
       <Component { ...props } project={ project }
         getGroups={ getGroups }

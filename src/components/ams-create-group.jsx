@@ -19,8 +19,8 @@ export default wrapper(({ user, group, authLevel, update, canSubmit, handleSubmi
     <form onSubmit={ handleSubmit }>
       <div className="grid grid-cols-4 gap-1">
         <div className="col-span-2">
-        <Input placeholder="Enter group name..." required showClear
-          value={ group } onChange={ group => update({ group }) }/>
+        <input placeholder="Enter group name..." required showClear
+          value={ group } onChange={ e => {update({ group:e.target.value })} }/>
         </div>
         <div className="col-span-1">
           <input type="number" min="0" max={ user.authLevel } required

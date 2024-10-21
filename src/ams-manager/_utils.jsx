@@ -40,7 +40,7 @@ const configMatcher = (config, path) => {
 }
 
 
-export function getActiveView(config, path, urlArg) {
+export function getActiveView(config, path, urlArg, depth) {
 	// add '' to params array to allow root (/) route  matching
 	let activeConfigs = configMatcher(config, path)
 
@@ -58,7 +58,7 @@ export function getActiveView(config, path, urlArg) {
 		// if there are children
 		let children = []
 		if(activeConfig.children) {
-			children = getActiveView(activeConfig.children, path,format, depth+1)
+			children = getActiveView(activeConfig.children, path,urlArg, depth+1)
 		}
 
 		let WrappedComp = AmsRouterWrapper(AmsReduxWrapper(Comp))

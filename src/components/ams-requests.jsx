@@ -6,7 +6,7 @@ import wrapper from "../wrappers/ams-requests"
 const PendingHeader = () =>
   <div className="grid grid-cols-12 gap-3 font-bold">
     <div className="col-span-3 border-b-2">
-      Pending Requests
+      User Account Requests
     </div>
     <div className="col-span-2 border-b-2 text-center">
       Age
@@ -58,7 +58,8 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
         </form>
       </div>
       <div className="col-span-2 text-center">
-        <button buttonTheme="buttonDanger" showConfirm
+        <button 
+         showConfirm
           onClick={ e => signupReject(request) }>
           reject
         </button>
@@ -81,7 +82,7 @@ const PendingRequests = ({ requests, ...props }) => {
 const AwaitingHeader = () =>
   <div className="grid grid-cols-12 gap-3 font-bold">
     <div className="col-span-3 border-b-2">
-      Awaiting Requests
+      Awaiting Email Verification
     </div>
     <div className="col-span-2 border-b-2 text-center">
       Age
@@ -101,10 +102,11 @@ const AwaitingRequest = ({ request, signupReject, ...props }) => {
         { age } hrs
       </div>
       <div className="col-span-2 text-center">
-        <Button buttonTheme="buttonDanger" showConfirm
+        <button 
+         showConfirm
           onClick={ e => signupReject(request) }>
           reject
-        </Button>
+        </button>
       </div>
     </div>
   )
@@ -161,9 +163,9 @@ const RejectedRequest = ({ request, groups, signupAccept, deleteRequest, ...prop
               </select>
             </div>
             <div className="col-span-2">
-              <Button type="submit" block disabled={ !canAccept }>
+              <button type="submit" block disabled={ !canAccept }>
                 accept
-              </Button>
+              </button>
             </div>
           </div>
         </form>

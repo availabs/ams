@@ -5,6 +5,8 @@ import Border from "./components/Border"
 
 import wrapper from "../wrappers/ams-user-search"
 
+import Select from "~/modules/avl-components/src/components/Inputs/select";
+
 const UserInProjectHeader = () =>
   <div className="grid grid-cols-15 py-1 gap-3 font-bold">
     <div className="col-span-5 border-b-2">
@@ -48,7 +50,7 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
   }, [assignToGroup, user, addTo]);
 
   const remove = React.useCallback(e => {
-    removeFromGroup(user.email, removeFrom.name);
+    removeFromGroup(user.email, removeFrom);
     setRemoveFrom("");
   }, [removeFromGroup, user, removeFrom]);
 
@@ -57,7 +59,7 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
       <div className="col-span-5 whitespace-nowrap overflow-hidden flex items-center">
         { user.email }
       </div>
-      <div className="col-span-4">
+      <div className="col-span-4 ">
         <div className="grid grid-cols-12 gap-1">
           <div className="col-span-8">
             <Select multi={ false } placeholder="Select a group..."
@@ -66,7 +68,10 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
               value={ addTo } onChange={ setAddTo }/>
           </div>
           <div className="col-span-4">
-            <button block disabled={ !addTo }
+            <button 
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white
+                bg-blue-300 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              disabled={ !addTo }
               onClick={ assign }>
               add
             </button>
@@ -76,13 +81,18 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
       <div className="col-span-4">
         <div className="grid grid-cols-12 gap-1">
           <div className="col-span-8">
-            <select  placeholder="Select a group..."
-              value={ removeFrom } onChange={ e => setRemoveFrom(e.target.value) }>
-                {userGroups.map(d => <option value={d.name}>{d.name}</option>)}
-            </select>
+            <Select  placeholder="Select a group..."
+              value={ removeFrom } onChange={(val) => setRemoveFrom(val)}
+              options={userGroups.map(d => d.name)}
+              >
+                
+            </Select>
           </div>
           <div className="col-span-4">
-            <button block disabled={ !removeFrom }
+            <button 
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white
+                bg-red-300 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              disabled={ !removeFrom }
               onClick={ remove }>
               remove
             </button>
