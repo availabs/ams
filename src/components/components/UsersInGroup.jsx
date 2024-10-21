@@ -1,7 +1,7 @@
 import React from "react"
 
 import { matchSorter } from 'match-sorter'
-
+import { ThemeContext } from "~/modules/avl-components/src";
 const UserHeader = ({ value, onChange, ...props }) =>
   <div className="grid grid-cols-9 font-bold gap-3">
     <div className="col-span-4 border-b-2">
@@ -20,19 +20,25 @@ const UserHeader = ({ value, onChange, ...props }) =>
   </div>
 
 const UserInGroup = ({ group, User, removeFromGroup, deleteUser, ...props }) => {
+  const theme = React.useContext(ThemeContext);
+  const buttonClass = theme.button({color:"danger", size:"sm"}).button;
   return (
     <div className="grid grid-cols-9 my-1">
       <div className="col-span-4">
         { User.email }
       </div>
       <div className="col-span-3 flex justify-center">
-        <button showConfirm
+        <button 
+          className={buttonClass}
+          showConfirm
           onClick={ e => removeFromGroup(User.email, group.name) }>
           remove
         </button>
       </div>
       <div className="col-span-2 flex justify-center">
-        <button showConfirm 
+        <button 
+          className={buttonClass}
+          showConfirm 
           onClick={ e => deleteUser(User.email) }>
           delete
         </button>
@@ -41,13 +47,15 @@ const UserInGroup = ({ group, User, removeFromGroup, deleteUser, ...props }) => 
   )
 }
 const UserNotInGroup = ({ group, User, assignToGroup, ...props }) => {
+  const theme = React.useContext(ThemeContext);
+  const addButtonClass = theme.button({color:"primary", size:"sm"}).button;
   return (
     <div className="grid grid-cols-12 mb-1 flex items-center">
       <div className="col-span-8">
         { User.email }
       </div>
       <div className="col-span-4">
-        <button onClick={ e => assignToGroup(User.email, group.name) }>
+        <button className={addButtonClass} onClick={ e => assignToGroup(User.email, group.name) }>
           add to group
         </button>
       </div>

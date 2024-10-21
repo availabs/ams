@@ -4,6 +4,8 @@ import UsersInGroup from "./UsersInGroup"
 
 import get from "lodash/get"
 import { useTheme } from '../../theme';
+import { ThemeContext } from "~/modules/avl-components/src";
+
 
 export const GroupHeader = ({ onChange, value }) =>
   <div className="grid grid-cols-12 gap-3 text-center font-bold mb-1">
@@ -29,6 +31,10 @@ const verify = (currAL, newAL) =>
   !isNaN(newAL) && (currAL !== newAL) && (newAL >= 0) && (newAL <= 10);
 
 export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProject, ...props }) => {
+  const theme = React.useContext(ThemeContext);
+  const adjustButtonClass = theme.button({color:"primary", size:"sm"}).button;
+  const removeButtonClass = theme.button({color:"danger", size:"sm"}).button;
+  const deleteButtonClass = theme.button({color:"danger", size:"sm"}).button;
   const [opened, setOpened] = React.useState(false),
     toggle = React.useCallback(() => setOpened(!opened), [opened]),
     Project = group.projects.reduce((a, c) => c.project_name === project ? c : a, {}),
@@ -39,7 +45,7 @@ export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProjec
     adjustAuthLevel(group.name, authLevel);
   }, [adjustAuthLevel, group.name, authLevel]);
 
-  const theme = useTheme();
+
 
   return (
     <div className={ `
@@ -69,7 +75,7 @@ export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProjec
                   value={ authLevel } onChange={ e => setAuthLevel(e.target.value) }/>
               </div>
               <div className="col-span-6">
-                <button type="submit"
+                <button className={adjustButtonClass} type="submit"
                   disabled={ !verify(+Project.auth_level, +authLevel) }>
                   adjust
                 </button>
@@ -79,14 +85,14 @@ export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProjec
         </div>
 
         <div className="col-span-3 flex justify-center">
-          <button showConfirm
+          <button className={removeButtonClass} showConfirm
             onClick={ e => removeFromProject(group.name) }>
             remove
           </button>
         </div>
 
         <div className="col-span-2 flex justify-center">
-          <button  showConfirm
+          <button  className={deleteButtonClass} showConfirm
             onClick={ e => deleteGroup(group.name) }>
             delete
           </button>

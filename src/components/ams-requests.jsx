@@ -1,5 +1,7 @@
 import React from "react"
-
+import {
+  ThemeContext,
+} from "~/modules/avl-components/src";
 
 import wrapper from "../wrappers/ams-requests"
 
@@ -19,6 +21,7 @@ const PendingHeader = () =>
     </div>
   </div>
 const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props }) => {
+  const myTheme = React.useContext(ThemeContext);
   const age = ((Date.now() - new Date(request.created_at).valueOf()) / (1000 * 60 * 60)).toFixed(1);
 
   const [group, setGroup] = React.useState(null),
@@ -50,7 +53,7 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
               </select>
             </div>
             <div className="col-span-2">
-              <button type="submit" block disabled={ !canAccept }>
+              <button className={myTheme.button({color:"primary", size:"sm"}).button} type="submit" block disabled={ !canAccept }>
                 accept
               </button>
             </div>
@@ -58,7 +61,8 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
         </form>
       </div>
       <div className="col-span-2 text-center">
-        <button 
+        <button
+          className={myTheme.button({color:"danger", size:"sm"}).button}
          showConfirm
           onClick={ e => signupReject(request) }>
           reject
@@ -92,6 +96,7 @@ const AwaitingHeader = () =>
     </div>
   </div>
 const AwaitingRequest = ({ request, signupReject, ...props }) => {
+  const myTheme = React.useContext(ThemeContext);
   const age = ((Date.now() - new Date(request.created_at).valueOf()) / (1000 * 60 * 60)).toFixed(1);
   return (
     <div className="grid grid-cols-12 gap-3 my-1 flex items-center">
@@ -102,8 +107,9 @@ const AwaitingRequest = ({ request, signupReject, ...props }) => {
         { age } hrs
       </div>
       <div className="col-span-2 text-center">
-        <button 
-         showConfirm
+        <button
+          className={myTheme.button({color:"danger", size:"sm"}).button}
+          showConfirm
           onClick={ e => signupReject(request) }>
           reject
         </button>

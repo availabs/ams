@@ -43,7 +43,6 @@ const amsProjectManagementWrapper = Component =>
         return a;
       }, [[], []]);
     }, [users, project]);
-    console.log("wrapper props, project::", props, project)
     return (
       <Component { ...props } project={ project }
         getGroups={ getGroups }
