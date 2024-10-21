@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import profileWrapper from "../wrappers/ams-profile";
 
 import updatePasswordWrapper from "../wrappers/ams-update-password"
 
+import {
+  ThemeContext,
+} from "~/modules/avl-components/src"
 export default profileWrapper((props) => {
   return <DefaultProfileComponent {...props} />;
 });
@@ -15,9 +18,10 @@ const newPassWrap = updatePasswordWrapper((props) => {
 
 const DefaultProfileComponent = (props) => {
   const { update, canSubmit, handleSubmit, user, password, verify } = props;
+  const myTheme = useContext(ThemeContext)?.auth();
 
   return (
-    <div className="h-full bg-gray-100 flex flex-wrap py-12 sm:px-6 lg:px-8 gap-3">
+    <div className={`${myTheme.background ?? 'bg-grey-100'} h-full flex flex-wrap py-12 sm:px-6 lg:px-8 gap-3`}>
       <div className="w-full">
         <h2 className="text-xl font-medium text-gray-900">Welcome</h2>
         <p className="text-lg font-thin text-gray-600">
@@ -37,16 +41,19 @@ const DefaultProfileComponent = (props) => {
   );
 };
 
-const ProfileTile = ({ children, title = "", tileWidth = "sm:max-w-md" }) => (
+const ProfileTile = ({ children, title = "", tileWidth = "sm:max-w-md" }) => {
+  const myTheme = useContext(ThemeContext)?.auth();
+  
+  return (
   <div className={`mt-8 sm:w-full ${tileWidth}`}>
-    <div className="bg-white py-8 px-4 shadow-lg sm:rounded-md sm:px-10 h-[400px]">
+    <div className={`${myTheme.tile ?? 'bg-white py-8 px-4 shadow-lg sm:rounded-md sm:px-10'}  h-[400px]`}>
       <div className="sm:w-full sm:max-w-md  border-gray-200">
         <h2 className="text-xl font-medium text-gray-900 mb-2">{title}</h2>
         {children}
       </div>
     </div>
   </div>
-);
+)};
 
 const SetPasswordForm = ({
   handleSubmit,
