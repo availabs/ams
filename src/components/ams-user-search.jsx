@@ -1,14 +1,10 @@
 import React from "react"
-
-
-import Border from "./components/Border"
-
 import wrapper from "../wrappers/ams-user-search"
-
 import Select from "~/modules/avl-components/src/components/Inputs/select";
+import { ThemeContext } from "~/modules/avl-components/src";
 
 const UserInProjectHeader = () =>
-  <div className="grid grid-cols-15 py-1 gap-3 font-bold">
+  <div className="grid grid-cols-15 grid-flow-col py-1 gap-3 font-bold">
     <div className="col-span-5 border-b-2">
       User Email
     </div>
@@ -24,6 +20,7 @@ const UserInProjectHeader = () =>
   </div>
 
 const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUser, ...props }) => {
+  const myTheme = React.useContext(ThemeContext);
   const [addTo, setAddTo] = React.useState(""),
     [removeFrom, setRemoveFrom] = React.useState("");
 
@@ -55,22 +52,22 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
   }, [removeFromGroup, user, removeFrom]);
 
   return (
-    <div className="grid grid-cols-15 py-1 gap-3">
+    <div className="grid grid-cols-15 grid-flow-col py-1 gap-3">
       <div className="col-span-5 whitespace-nowrap overflow-hidden flex items-center">
         { user.email }
       </div>
-      <div className="col-span-4 ">
-        <div className="grid grid-cols-12 gap-1">
+      <div className="col-span-4 grid">
+        <div className="grid grid-cols-12 gap-1 items-center">
           <div className="col-span-8">
-            <Select multi={ false } placeholder="Select a group..."
+            <Select 
+            multi={ false } placeholder="Select a group..."
               options={ otherGroups } accessor={ g => g.name }
               listAccessor={ g => `${ g.name } (auth level ${ g.authLevel })` }
               value={ addTo } onChange={ setAddTo }/>
           </div>
           <div className="col-span-4">
             <button 
-              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white
-                bg-blue-300 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              className={myTheme.button({color:"primary", size:"sm"}).button + "flex justify-center"}
               disabled={ !addTo }
               onClick={ assign }>
               add
@@ -81,27 +78,29 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
       <div className="col-span-4">
         <div className="grid grid-cols-12 gap-1">
           <div className="col-span-8">
-            <Select  placeholder="Select a group..."
+            <Select
+              placeholder="Select a group..."
               value={ removeFrom } onChange={(val) => setRemoveFrom(val)}
               options={userGroups.map(d => d.name)}
-              >
-                
-            </Select>
+            />
           </div>
           <div className="col-span-4">
             <button 
-              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white
-                bg-red-300 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+              className={myTheme.button({color:"cancel", size:"sm"}).button}
               disabled={ !removeFrom }
-              onClick={ remove }>
+              onClick={ remove }
+            >
               remove
             </button>
           </div>
         </div>
       </div>
       <div className="col-span-2 flex justify-center">
-        <button buttonTheme="buttonDanger" showConfirm
-          onClick={ e => deleteUser(user.email) }>
+        <button 
+          className={myTheme.button({color:"danger", size:"sm"}).button}
+          showConfirm
+          onClick={ e => deleteUser(user.email) }
+        >
           delete
         </button>
       </div>
@@ -109,29 +108,39 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
   )
 }
 
-export default wrapper(({ search, setSearch, adjustAmount, matches, remaining, ...props }) =>
-  <Border>
-    <div className={ `grid grid-cols-2 gap-x-3 gap-y-2` }>
-      <div className="col-span-1">
-        <input placeholder="Search for a user..." showClear
-          value={ search } onChange={ e => setSearch(e.target.value) }/>
-      </div>
-      <div className="col-span-1">
-        { !search ? null :
-          <div className="flex justify-center">
-            <button className="mx-1"
-              disabled={ matches.length <= 5 }
-              onClick={ e => adjustAmount(-5) }>
-              Show Less
-            </button>
-            <button className="mx-1"
-              disabled={ !remaining }
-              onClick={ e => adjustAmount(5) }>
-              Show More
-            </button>
-          </div>
-        }
-      </div>
+export default wrapper(({ search, setSearch, adjustAmount, matches, remaining, ...props }) => {
+  const myTheme = React.useContext(ThemeContext);
+  const buttonClass = myTheme.button({color:"white", size:"sm"}).button
+  return (
+    <>
+      <div className={ `grid grid-cols-2 gap-x-3 gap-y-2` }>
+        <div className="col-span-1">
+          <input 
+            className={myTheme.input().input}
+            placeholder="Search for a user..." showClear
+            value={ search } onChange={ e => setSearch(e.target.value) }
+          />
+        </div>
+        <div className="col-span-1">
+          { !search ? null :
+            <div className="flex justify-center">
+              <button 
+                className={buttonClass + "mx-2"}
+                disabled={ matches.length <= 5 }
+                onClick={ e => adjustAmount(-5) }
+              >
+                Show Fewer
+              </button>
+              <button
+                className={buttonClass}
+                disabled={ !remaining }
+                onClick={ e => adjustAmount(5) }
+              >
+                Show More
+              </button>
+            </div>
+          }
+        </div>
         { !search ? null :
           <div className="col-span-2">
             <UserInProjectHeader />
@@ -141,11 +150,11 @@ export default wrapper(({ search, setSearch, adjustAmount, matches, remaining, .
             }
           </div>
         }
-    </div>
-    { !(search && remaining) ? null :
-      <div className="py-1">
-        Plus { remaining } others...
       </div>
-    }
-  </Border>
-)
+      { !(search && remaining) ? null :
+        <div className="py-1">
+          Plus { remaining } others...
+        </div>
+      }
+    </>)
+})

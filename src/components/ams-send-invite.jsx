@@ -8,12 +8,15 @@ import Select from "~/modules/avl-components/src/components/Inputs/select";
 export default wrapper(
   ({ email, verify, group, update, canSubmit, handleSubmit, groups }) => {
     const myTheme = React.useContext(ThemeContext);
-    const sendButtonClass = myTheme.button({color:"primary", size:"sm"}).button;
-    
+    const sendButtonClass = myTheme.button({
+      color: "primary",
+      size: "sm",
+    }).button;
+    const inputClass = myTheme.input().input;
     return (
-      <Border>
-        <div className="grid grid-cols-10 gap-1 font-bold border-b-2 mb-1">
-          <div className="col-span-3 text-xl">Send Invite</div>
+      <>
+        <div className="grid grid-cols-10 gap-1 font-bold mb-1">
+          <div className="col-span-3">User Email</div>
           <div className="col-span-3 flex items-end">Verify Email</div>
           <div className="col-span-3 flex items-end">Assign to Group</div>
           <div className="col-span-1 flex items-end"></div>
@@ -22,6 +25,7 @@ export default wrapper(
           <div className="grid grid-cols-10 gap-1 mb-2">
             <div className="col-span-3">
               <input
+                className={`h-full ${inputClass}`}
                 placeholder="Enter user email..."
                 type="email"
                 onChange={(v) => update({ email: v.target.value })}
@@ -30,6 +34,7 @@ export default wrapper(
             </div>
             <div className="col-span-3">
               <input
+                className={`h-full ${inputClass}`}
                 placeholder="Verify user email..."
                 type="email"
                 onChange={(v) => update({ verify: v.target.value })}
@@ -48,13 +53,18 @@ export default wrapper(
               />
             </div>
             <div className="col-span-1">
-              <button className={sendButtonClass} block type="submit" disabled={!canSubmit}>
+              <button
+                className={sendButtonClass}
+                block
+                type="submit"
+                disabled={!canSubmit}
+              >
                 send
               </button>
             </div>
           </div>
         </form>
-      </Border>
+      </>
     );
   }
 );

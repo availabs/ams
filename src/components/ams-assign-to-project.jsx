@@ -1,37 +1,36 @@
 import React from "react";
 import { ThemeContext } from "~/modules/avl-components/src";
-
-import Border from "./components/Border";
-
 import wrapper from "../wrappers/ams-assign-to-project";
+import Select from "~/modules/avl-components/src/components/Inputs/select";
 
 export default wrapper(
   ({ groups, user, group, authLevel, update, canSubmit, handleSubmit }) => {
     const myTheme = React.useContext(ThemeContext);
     const assignButtonClass = myTheme.button({color:"primary", size:"sm"}).button;
+    const numericInputClass = myTheme.input().input;
     return (
-      <Border className="max-w-2xl pb-4">
-        <div className="border-b-2 mb-1">
+      <>
+        <div className=" mb-1">
           <div className="grid grid-cols-4 gap-1">
-            <div className="col-span-2 font-bold">Assign to Project</div>
+            <div className="col-span-2 font-bold">Group</div>
             <div className="col-span-1">Authority Level</div>
           </div>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-4 gap-1">
             <div className="col-span-2">
-              <select
+              <Select
+                domain={groups}
+                accessor={(g) => g.name}
                 value={group}
-                onChange={(e) => update({ group: e.target.value })}
+                onChange={(e) => update({ group: e })}
                 placeholder="Select a group..."
-              >
-                {groups.map((d) => (
-                  <option value={d.name}>{d.name}</option>
-                ))}
-              </select>
+              />
+
             </div>
             <div className="col-span-1">
               <input
+                className={`h-full ${numericInputClass}`}
                 type="number"
                 min="0"
                 max={user.authLevel}
@@ -47,7 +46,7 @@ export default wrapper(
             </div>
           </div>
         </form>
-      </Border>
+      </>
     );
   }
 );

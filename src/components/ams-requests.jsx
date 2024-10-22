@@ -2,8 +2,9 @@ import React from "react"
 import {
   ThemeContext,
 } from "~/modules/avl-components/src";
-
 import wrapper from "../wrappers/ams-requests"
+import Select from "~/modules/avl-components/src/components/Inputs/select";
+
 
 const PendingHeader = () =>
   <div className="grid grid-cols-12 gap-3 font-bold">
@@ -13,8 +14,13 @@ const PendingHeader = () =>
     <div className="col-span-2 border-b-2 text-center">
       Age
     </div>
-    <div className="col-span-5 border-b-2 text-center">
+    <div className="col-span-5 border-b-2 text-center grid grid-cols-5">
+    <div className="col-span-3">
+      Group
+    </div>
+    <div className="col-span-2">
       Accept Request
+    </div>
     </div>
     <div className="col-span-2 border-b-2 text-center">
       Reject Request
@@ -45,15 +51,16 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
         <form onSubmit={ handleSubmit }>
           <div className="grid grid-cols-5 gap-1">
             <div className="col-span-3">
-              <select
+              <Select
+                domain={groups}
+                accessor={(g) => g.name}
                 value={ group } 
                 onChange={ e => setGroup(e.target.value) }
-                placeholder="Select a group...">
-                 {groups.map(d => <option value={d.name}>{d.name}</option>)}
-              </select>
+                placeholder="Select a group..."
+              />
             </div>
-            <div className="col-span-2">
-              <button className={myTheme.button({color:"primary", size:"sm"}).button} type="submit" block disabled={ !canAccept }>
+            <div className="col-span-2 grid">
+              <button className={`justify-self-center ${myTheme.button({color:"primary", size:"sm"}).button}`} type="submit" disabled={ !canAccept }>
                 accept
               </button>
             </div>
@@ -63,8 +70,9 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
       <div className="col-span-2 text-center">
         <button
           className={myTheme.button({color:"danger", size:"sm"}).button}
-         showConfirm
-          onClick={ e => signupReject(request) }>
+          showConfirm
+          onClick={ e => signupReject(request) }
+        >
           reject
         </button>
       </div>

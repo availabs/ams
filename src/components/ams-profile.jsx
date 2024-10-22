@@ -18,8 +18,8 @@ const newPassWrap = updatePasswordWrapper((props) => {
 })
 
 const DefaultProfileComponent = (props) => {
-  const { update, canSubmit, handleSubmit, user, password, verify } = props;
-  const myTheme = useContext(ThemeContext)?.auth();
+  const { user } = props;
+  const myTheme = useContext(ThemeContext);
 
   return (
     <div className={`${myTheme.background ?? 'bg-grey-100'} h-full flex flex-wrap py-12 sm:px-6 lg:px-8 gap-3`}>
@@ -43,7 +43,7 @@ const DefaultProfileComponent = (props) => {
 };
 
 const ProfileTile = ({ children, title = "", tileWidth = "sm:max-w-md" }) => {
-  const myTheme = useContext(ThemeContext)?.auth();
+  const myTheme = useContext(ThemeContext);
   
   return (
   <div className={`mt-8 sm:w-full ${tileWidth}`}>
@@ -64,7 +64,7 @@ const SetPasswordForm = ({
   verify,
   current
 }) =>  {
-  const myTheme = useContext(ThemeContext)?.auth();
+  const myTheme = useContext(ThemeContext);
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="pt-4">

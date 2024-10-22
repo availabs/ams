@@ -21,7 +21,8 @@ const UserHeader = ({ value, onChange, ...props }) =>
 
 const UserInGroup = ({ group, User, removeFromGroup, deleteUser, ...props }) => {
   const theme = React.useContext(ThemeContext);
-  const buttonClass = theme.button({color:"danger", size:"sm"}).button;
+  const removeButtonClass = theme.button({color:"cancel", size:"sm"}).button;
+  const deleteButtonClass = theme.button({color:"danger", size:"sm"}).button;
   return (
     <div className="grid grid-cols-9 my-1">
       <div className="col-span-4">
@@ -29,17 +30,19 @@ const UserInGroup = ({ group, User, removeFromGroup, deleteUser, ...props }) => 
       </div>
       <div className="col-span-3 flex justify-center">
         <button 
-          className={buttonClass}
+          className={removeButtonClass}
           showConfirm
-          onClick={ e => removeFromGroup(User.email, group.name) }>
+          onClick={ e => removeFromGroup(User.email, group.name) }
+        >
           remove
         </button>
       </div>
       <div className="col-span-2 flex justify-center">
         <button 
-          className={buttonClass}
+          className={deleteButtonClass}
           showConfirm 
-          onClick={ e => deleteUser(User.email) }>
+          onClick={ e => deleteUser(User.email) }
+        >
           delete
         </button>
       </div>

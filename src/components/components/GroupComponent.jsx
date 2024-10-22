@@ -33,7 +33,7 @@ const verify = (currAL, newAL) =>
 export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProject, ...props }) => {
   const theme = React.useContext(ThemeContext);
   const adjustButtonClass = theme.button({color:"primary", size:"sm"}).button;
-  const removeButtonClass = theme.button({color:"danger", size:"sm"}).button;
+  const removeButtonClass = theme.button({color:"cancel", size:"sm"}).button;
   const deleteButtonClass = theme.button({color:"danger", size:"sm"}).button;
   const [opened, setOpened] = React.useState(false),
     toggle = React.useCallback(() => setOpened(!opened), [opened]),
