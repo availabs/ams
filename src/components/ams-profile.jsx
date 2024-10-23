@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import profileWrapper from "../wrappers/ams-profile";
 
 import updatePasswordWrapper from "../wrappers/ams-update-password"
+import { Button } from '~/modules/avl-components/src'
 
 import {
   ThemeContext,
@@ -64,7 +65,6 @@ const SetPasswordForm = ({
   verify,
   current
 }) =>  {
-  const myTheme = useContext(ThemeContext);
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="pt-4">
@@ -128,28 +128,14 @@ const SetPasswordForm = ({
         </div>
       </div>
       <div>
-        <button
+        <Button
           type="submit"
           disabled={!canSubmit}
-          className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-            !canSubmit
-              ? `${myTheme.button.default ?? 'bg-blue-100'} hover:bg-blue-200`
-              : `${myTheme.button.default ?? 'bg-blue-600'}  hover:bg-blue-700`
-          } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+          themeOptions={{width:'full'}}
         >
           Set Password
-        </button>
+        </Button>
       </div>
     </form>
   )
 };
-
-// export default ({
-//   type: AmsProfile,
-//   props: { amsAction: "profile", authLevel: 0 },
-//   wrappers: ["ams-profile"],
-//   // children: [
-//   //   { type: "ams-update-password" },
-//   //   { type: "ams-messages" }
-//   // ]
-// })

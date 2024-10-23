@@ -1,7 +1,8 @@
 import React from "react"
 
 import { matchSorter } from 'match-sorter'
-import { ThemeContext } from "~/modules/avl-components/src";
+import { Button } from '~/modules/avl-components/src'
+
 const UserHeader = ({ value, onChange, ...props }) =>
   <div className="grid grid-cols-9 font-bold gap-3">
     <div className="col-span-4 border-b-2">
@@ -20,47 +21,45 @@ const UserHeader = ({ value, onChange, ...props }) =>
   </div>
 
 const UserInGroup = ({ group, User, removeFromGroup, deleteUser, ...props }) => {
-  const theme = React.useContext(ThemeContext);
-  const removeButtonClass = theme.button({color:"cancel", size:"sm"}).button;
-  const deleteButtonClass = theme.button({color:"danger", size:"sm"}).button;
   return (
     <div className="grid grid-cols-9 my-1">
       <div className="col-span-4">
         { User.email }
       </div>
       <div className="col-span-3 flex justify-center">
-        <button 
-          className={removeButtonClass}
+        <Button 
+          themeOptions={{color:"cancel", size:"sm"}}
           showConfirm
           onClick={ e => removeFromGroup(User.email, group.name) }
         >
           remove
-        </button>
+        </Button>
       </div>
       <div className="col-span-2 flex justify-center">
-        <button 
-          className={deleteButtonClass}
+        <Button 
+          themeOptions={{color:"danger", size:"sm"}}
           showConfirm 
           onClick={ e => deleteUser(User.email) }
         >
           delete
-        </button>
+        </Button>
       </div>
     </div>
   )
 }
 const UserNotInGroup = ({ group, User, assignToGroup, ...props }) => {
-  const theme = React.useContext(ThemeContext);
-  const addButtonClass = theme.button({color:"primary", size:"sm"}).button;
   return (
     <div className="grid grid-cols-12 mb-1 flex items-center">
       <div className="col-span-8">
         { User.email }
       </div>
       <div className="col-span-4">
-        <button className={addButtonClass} onClick={ e => assignToGroup(User.email, group.name) }>
+        <Button 
+          themeOptions={{size:"sm"}} 
+          onClick={ e => assignToGroup(User.email, group.name) }
+        >
           add to group
-        </button>
+        </Button>
       </div>
     </div>
   )
@@ -85,7 +84,6 @@ export default ({ group, users, ...props }) => {
 
   const otherSearch = matchSorter(otherUsers, otherUserSearch, { keys: ["email"] });
 
-console.log("???", usersInGroup)
   return (
     <div>
       <div className="mb-5 grid grid-cols-3 gap-2">
@@ -93,22 +91,26 @@ console.log("???", usersInGroup)
           <input value={ otherUserSearch } onChange={ e => setOtherUserSearch(e.target.value) }
             placeholder="Search for another user..." showClear/>
           { otherUserSearch && otherSearch.length ?
-              <div className="absolute left-0 bottom-0 right-0">
-                { otherSearch.length <= 5 ? null :
-                  <div className="flex justify-center">
-                    <button onClick={ e => setNum(num - 5) }
-                      disabled={ num === 5 }
-                      className="mx-1">
-                      Show Less
-                    </button>
-                    <button onClick={ e => setNum(num + 5) }
-                      disabled={ num > otherSearch.length }
-                      className="mx-1">
-                      Show More
-                    </button>
-                  </div>
-                }
-              </div> : null
+            <div className="absolute left-0 bottom-0 right-0">
+              { otherSearch.length <= 5 ? null :
+                <div className="flex justify-center">
+                  <Button
+                    themeOptions={{size:"sm"}} 
+                    onClick={ e => setNum(num - 5) }
+                    disabled={ num === 5 }
+                  >
+                    Show Fewer
+                  </Button>
+                  <Button
+                    themeOptions={{size:"sm"}} 
+                    onClick={ e => setNum(num + 5) }
+                    disabled={ num > otherSearch.length }
+                  >
+                    Show More
+                  </Button>
+                </div>
+              }
+            </div> : null
           }
         </div>
         <div className="col-span-2">

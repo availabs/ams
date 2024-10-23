@@ -1,12 +1,11 @@
 import React from "react";
-import { ThemeContext } from "~/modules/avl-components/src";
+import { ThemeContext, Button } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-assign-to-project";
 import Select from "~/modules/avl-components/src/components/Inputs/select";
 
 export default wrapper(
   ({ groups, user, group, authLevel, update, canSubmit, handleSubmit }) => {
     const myTheme = React.useContext(ThemeContext);
-    const assignButtonClass = myTheme.button({color:"primary", size:"sm"}).button;
     const numericInputClass = myTheme.input().input;
     return (
       <>
@@ -39,10 +38,15 @@ export default wrapper(
                 onChange={(v) => update({ authLevel: v.target.value })}
               />
             </div>
-            <div className="col-span-1 flex justify-center">
-              <button className={assignButtonClass} type="submit" block disabled={!canSubmit}>
+            <div className="col-span-1 grid">
+              <Button 
+                themeOptions={{size:"sm"}}
+                type="submit"
+                block
+                disabled={!canSubmit}
+              >
                 assign
-              </button>
+              </Button>
             </div>
           </div>
         </form>

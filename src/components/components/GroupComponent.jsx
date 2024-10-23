@@ -3,7 +3,7 @@ import React from "react"
 import UsersInGroup from "./UsersInGroup"
 
 import get from "lodash/get"
-import { useTheme } from '../../theme';
+import { Button } from '~/modules/avl-components/src'
 import { ThemeContext } from "~/modules/avl-components/src";
 
 
@@ -32,9 +32,7 @@ const verify = (currAL, newAL) =>
 
 export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProject, ...props }) => {
   const theme = React.useContext(ThemeContext);
-  const adjustButtonClass = theme.button({color:"primary", size:"sm"}).button;
-  const removeButtonClass = theme.button({color:"cancel", size:"sm"}).button;
-  const deleteButtonClass = theme.button({color:"danger", size:"sm"}).button;
+
   const [opened, setOpened] = React.useState(false),
     toggle = React.useCallback(() => setOpened(!opened), [opened]),
     Project = group.projects.reduce((a, c) => c.project_name === project ? c : a, {}),
@@ -75,27 +73,36 @@ export default ({ group, project, adjustAuthLevel, deleteGroup, removeFromProjec
                   value={ authLevel } onChange={ e => setAuthLevel(e.target.value) }/>
               </div>
               <div className="col-span-6">
-                <button className={adjustButtonClass} type="submit"
-                  disabled={ !verify(+Project.auth_level, +authLevel) }>
+                <Button 
+                  themeOptions={{size:"sm"}}
+                  type="submit"
+                  disabled={ !verify(+Project.auth_level, +authLevel) }
+                >
                   adjust
-                </button>
+                </Button>
               </div>
             </div>
           </form>
         </div>
 
         <div className="col-span-3 flex justify-center">
-          <button className={removeButtonClass} showConfirm
-            onClick={ e => removeFromProject(group.name) }>
+          <Button
+            themeOptions={{size:"sm", color:'cancel'}}
+            showConfirm
+            onClick={ e => removeFromProject(group.name) }
+          >
             remove
-          </button>
+          </Button>
         </div>
 
         <div className="col-span-2 flex justify-center">
-          <button  className={deleteButtonClass} showConfirm
-            onClick={ e => deleteGroup(group.name) }>
+          <Button
+            themeOptions={{size:"sm", color:'danger'}}
+            showConfirm
+            onClick={ e => deleteGroup(group.name) }
+          >
             delete
-          </button>
+          </Button>
         </div>
 
       </div>

@@ -1,11 +1,10 @@
 import React from "react";
-import { ThemeContext } from "~/modules/avl-components/src";
+import { ThemeContext, Button } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-create-group";
 
 export default wrapper(
   ({ user, group, authLevel, update, canSubmit, handleSubmit }) => {
     const myTheme = React.useContext(ThemeContext);
-    const createButtonClass = myTheme.button({color:"primary", size:"sm"}).button;
     const inputClass = myTheme.input().input;
     return (
       <>
@@ -40,10 +39,15 @@ export default wrapper(
                 onChange={(e) => update({ authLevel: e.target.value })}
               />
             </div>
-            <div className="col-span-1 flex justify-center">
-              <button className={createButtonClass} type="submit" block disabled={!canSubmit}>
+            <div className="col-span-1 grid">
+              <Button
+                themeOptions={{size:"sm"}}
+                type="submit"
+                block
+                disabled={!canSubmit}
+              >
                 create
-              </button>
+              </Button>
             </div>
           </div>
         </form>

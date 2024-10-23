@@ -1,7 +1,7 @@
 import React from "react"
 import wrapper from "../wrappers/ams-user-search"
 import Select from "~/modules/avl-components/src/components/Inputs/select";
-import { ThemeContext } from "~/modules/avl-components/src";
+import { ThemeContext, Button } from "~/modules/avl-components/src";
 
 const UserInProjectHeader = () =>
   <div className="grid grid-cols-15 grid-flow-col py-1 gap-3 font-bold">
@@ -20,7 +20,6 @@ const UserInProjectHeader = () =>
   </div>
 
 const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUser, ...props }) => {
-  const myTheme = React.useContext(ThemeContext);
   const [addTo, setAddTo] = React.useState(""),
     [removeFrom, setRemoveFrom] = React.useState("");
 
@@ -66,12 +65,14 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
               value={ addTo } onChange={ setAddTo }/>
           </div>
           <div className="col-span-4">
-            <button 
-              className={myTheme.button({color:"primary", size:"sm"}).button + "flex justify-center"}
+            <Button 
+              themeOptions={{size:"sm"}}
+              className={"flex justify-center"}
               disabled={ !addTo }
-              onClick={ assign }>
+              onClick={ assign }
+            >
               add
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -85,24 +86,24 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
             />
           </div>
           <div className="col-span-4">
-            <button 
-              className={myTheme.button({color:"cancel", size:"sm"}).button}
+            <Button
+              themeOptions={{color:"cancel", size:"sm"}}
               disabled={ !removeFrom }
               onClick={ remove }
             >
               remove
-            </button>
+            </Button>
           </div>
         </div>
       </div>
       <div className="col-span-2 flex justify-center">
-        <button 
-          className={myTheme.button({color:"danger", size:"sm"}).button}
+        <Button
+          themeOptions={{color:"danger", size:"sm"}}
           showConfirm
           onClick={ e => deleteUser(user.email) }
         >
           delete
-        </button>
+        </Button>
       </div>
     </div>
   )

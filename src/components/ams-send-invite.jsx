@@ -1,6 +1,5 @@
 import React from "react";
-import { ThemeContext } from "~/modules/avl-components/src";
-import Border from "./components/Border";
+import { ThemeContext, Button } from "~/modules/avl-components/src";
 
 import wrapper from "../wrappers/ams-send-invite";
 
@@ -8,10 +7,6 @@ import Select from "~/modules/avl-components/src/components/Inputs/select";
 export default wrapper(
   ({ email, verify, group, update, canSubmit, handleSubmit, groups }) => {
     const myTheme = React.useContext(ThemeContext);
-    const sendButtonClass = myTheme.button({
-      color: "primary",
-      size: "sm",
-    }).button;
     const inputClass = myTheme.input().input;
     return (
       <>
@@ -52,15 +47,15 @@ export default wrapper(
                 value={group}
               />
             </div>
-            <div className="col-span-1">
-              <button
-                className={sendButtonClass}
+            <div className="col-span-1 grid">
+              <Button
+                themeOptions={{size: "sm"}}
                 block
                 type="submit"
                 disabled={!canSubmit}
               >
                 send
-              </button>
+              </Button>
             </div>
           </div>
         </form>

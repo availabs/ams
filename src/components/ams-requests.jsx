@@ -1,6 +1,6 @@
 import React from "react"
 import {
-  ThemeContext,
+  Button
 } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-requests"
 import Select from "~/modules/avl-components/src/components/Inputs/select";
@@ -27,7 +27,6 @@ const PendingHeader = () =>
     </div>
   </div>
 const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props }) => {
-  const myTheme = React.useContext(ThemeContext);
   const age = ((Date.now() - new Date(request.created_at).valueOf()) / (1000 * 60 * 60)).toFixed(1);
 
   const [group, setGroup] = React.useState(null),
@@ -60,21 +59,25 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
               />
             </div>
             <div className="col-span-2 grid">
-              <button className={`justify-self-center ${myTheme.button({color:"primary", size:"sm"}).button}`} type="submit" disabled={ !canAccept }>
+              <Button
+                themeOptions={{size:"sm"}}
+                type="submit"
+                disabled={ !canAccept }
+              >
                 accept
-              </button>
+              </Button>
             </div>
           </div>
         </form>
       </div>
-      <div className="col-span-2 text-center">
-        <button
-          className={myTheme.button({color:"danger", size:"sm"}).button}
+      <div className="col-span-2 grid">
+        <Button
+          themeOptions={{color:"danger", size:"sm"}}
           showConfirm
           onClick={ e => signupReject(request) }
         >
           reject
-        </button>
+        </Button>
       </div>
     </div>
   )
@@ -104,7 +107,6 @@ const AwaitingHeader = () =>
     </div>
   </div>
 const AwaitingRequest = ({ request, signupReject, ...props }) => {
-  const myTheme = React.useContext(ThemeContext);
   const age = ((Date.now() - new Date(request.created_at).valueOf()) / (1000 * 60 * 60)).toFixed(1);
   return (
     <div className="grid grid-cols-12 gap-3 my-1 flex items-center">
@@ -114,13 +116,14 @@ const AwaitingRequest = ({ request, signupReject, ...props }) => {
       <div className="col-span-2 text-center">
         { age } hrs
       </div>
-      <div className="col-span-2 text-center">
-        <button
-          className={myTheme.button({color:"danger", size:"sm"}).button}
+      <div className="col-span-2 grid">
+        <Button
+          themeOptions={{color:"danger", size:"sm"}}
           showConfirm
-          onClick={ e => signupReject(request) }>
+          onClick={ e => signupReject(request) }
+        >
           reject
-        </button>
+        </Button>
       </div>
     </div>
   )
