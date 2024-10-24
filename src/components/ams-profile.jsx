@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import profileWrapper from "../wrappers/ams-profile";
 
 import updatePasswordWrapper from "../wrappers/ams-update-password"
-import { Button } from '~/modules/avl-components/src'
+import userPreferencesWrapper from "../wrappers/ams-user-preferences"
+import { Button, Input } from '~/modules/avl-components/src'
 
 import {
   ThemeContext,
@@ -14,6 +15,12 @@ export default profileWrapper((props) => {
 
 const newPassWrap = updatePasswordWrapper((props) => {
   return <SetPasswordForm
+    {...props}
+  />
+})
+
+const userPreferencesWrap = userPreferencesWrapper((props) => {
+  return <UserPreferencesForm
     {...props}
   />
 })
@@ -35,7 +42,9 @@ const DefaultProfileComponent = (props) => {
           </span>
         </p>
       </div>
-      <ProfileTile title="Personal Info" tileWidth="sm:max-w-lg"></ProfileTile>
+      <ProfileTile title="Personal Info" tileWidth="sm:max-w-lg">
+        {userPreferencesWrap(props)}
+      </ProfileTile>
       <ProfileTile title="Update Password" tileWidth="sm:max-w-lg">
         {newPassWrap(props)}
       </ProfileTile>
@@ -48,7 +57,7 @@ const ProfileTile = ({ children, title = "", tileWidth = "sm:max-w-md" }) => {
   
   return (
   <div className={`mt-8 sm:w-full ${tileWidth}`}>
-    <div className={`${myTheme.tile ?? 'bg-white py-8 px-4 shadow-lg sm:rounded-md sm:px-10'}  h-[400px]`}>
+    <div className={`${myTheme.tile ?? 'bg-white py-8 px-4 shadow-lg sm:rounded-md sm:px-10'}  min-height-[400px]`}>
       <div className="sm:w-full sm:max-w-md  border-gray-200">
         <h2 className="text-xl font-medium text-gray-900 mb-2">{title}</h2>
         {children}
@@ -56,6 +65,68 @@ const ProfileTile = ({ children, title = "", tileWidth = "sm:max-w-md" }) => {
     </div>
   </div>
 )};
+
+const UserPreferencesForm = (props) => {
+  const { preferences, setNewPreferences, updateDisabled, updatePreferences } =
+    props;
+
+  const PREFERENCES_CONFIG = {
+    display_name: {
+      name: "Display Name:",
+      type: 'text'
+    },
+    phone: {
+      name: "Phone:",
+      type: 'text'
+    },
+    maxRecent: {
+      name: "Max # of recent activities on Dashboard:",
+      type: 'number'
+    },
+    maxExpanded: {
+      name: "Max # of recent activities when expanded",
+      type: 'number'
+    },
+    maxSnapshots: {
+      name: "Max # of snapshots on Dashboard",
+      type: 'number'
+    },
+  };
+
+  return (
+    <div className="space-y-6">
+      {Object.keys(PREFERENCES_CONFIG).map((preferenceKey) => {
+        const preferenceConfg = PREFERENCES_CONFIG[preferenceKey];
+        return (
+          <InputContainer
+            key={`${preferenceKey}_preferences_form`}
+            header={preferenceConfg.name}
+            input={
+              <Input
+                type={preferenceConfg.type}
+                value={preferences[preferenceKey]}
+                placeholder=""
+                onChange={(e) =>
+                  setNewPreferences({ ...preferences, [preferenceKey]: e })
+                }
+              />
+            }
+          />
+        );
+      })}
+      <div>
+        <Button
+          type="submit"
+          disabled={updateDisabled}
+          themeOptions={{ width: "full" }}
+          onClick={updatePreferences}
+        >
+          Save changes
+        </Button>
+      </div>
+    </div>
+  );
+};
 
 const SetPasswordForm = ({
   handleSubmit,
@@ -67,12 +138,12 @@ const SetPasswordForm = ({
 }) =>  {
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
-      <div className="pt-4">
-        <label htmlFor="email" className="block text-sm font-thin text-gray-700">
+      <div>
+        <label htmlFor="email" className="block text-xs text-gray-700">
           Current Password
         </label>
-        <div className="mt-1">
-          <input
+        <div className="mt-1 grid">
+          <Input
             id="current"
             name="current"
             type="password"
@@ -81,19 +152,18 @@ const SetPasswordForm = ({
             autoComplete="Current password"
             placeholder="Enter your current password"
             required
-            className="appearance-none block w-full px-3 py-2 border-b border-gray-300 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         </div>
       </div>
       <div>
         <label
           htmlFor="password"
-          className="block text-sm font-thin text-gray-700"
+          className="block text-xs text-gray-700"
         >
           New Password
         </label>
-        <div className="mt-1">
-          <input
+        <div className="mt-1 grid">
+          <Input
             id="password"
             name="password"
             type="password"
@@ -102,19 +172,18 @@ const SetPasswordForm = ({
             autoComplete="New password"
             placeholder="New password"
             required
-            className="appearance-none block w-full px-3 py-2 border-b border-gray-300 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         </div>
       </div>
       <div>
         <label
           htmlFor="verify"
-          className="block text-sm font-thin text-gray-700"
+          className="block text-xs text-gray-700"
         >
           Confirm New Password
         </label>
-        <div className="mt-1">
-          <input
+        <div className="mt-1 grid">
+          <Input
             id="verify"
             name="verify"
             type="password"
@@ -123,7 +192,6 @@ const SetPasswordForm = ({
             autoComplete="Confirm new password"
             placeholder="Confirm new password"
             required
-            className="appearance-none block w-full px-3 py-2 border-b border-gray-300 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         </div>
       </div>
@@ -139,3 +207,14 @@ const SetPasswordForm = ({
     </form>
   )
 };
+
+const InputContainer = ({header, input}) => (
+    <div className="flex flex-col">
+      <div className="flex px-2 pb-1 text-xs text-gray-700 capitalize">
+        {header}
+      </div>
+      <div className="grid pl-1">
+        {input}
+      </div>
+    </div>
+);
