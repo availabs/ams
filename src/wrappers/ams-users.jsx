@@ -1,31 +1,66 @@
 import React from "react"
-import { matchSorter } from 'match-sorter'
+import { Config } from "../api/utils"
 
-export default Component =>
-  class Wrapper extends React.Component {
-    static defaultProps = {
-      amsAction: "users",
-      authLevel: 5
-    }
-    state = {
-      search: "",
-      amount: 5
-    }
-    adjustAmount(adj, total) {
-      const { amount } = this.state;
-      if (((adj < 0) && (amount > 5)) || ((adj > 0) && (amount < total))) {
-        this.setState({ amount: amount + adj });
-      }
-    }
-    render() {
-      const matches = matchSorter(this.props.users, this.state.search, { keys: ["email"] }),
-        remaining = Math.max(0, matches.length - this.state.amount);
-      return (
-        <Component { ...this.props } { ...this.state }
-          setSearch={ search => this.setState({ search }) }
-          adjustAmount={ adj => this.adjustAmount(adj, matches.length) }
-          matches={ this.state.search ? matches.slice(0, this.state.amount) : [] }
-          remaining={ remaining }/>
-      )
-    }
+const nameSorter = (a, b) => (
+  a.name.toLowerCase() < b.name.toLowerCase() ? -1 :
+  a.name.toLowerCase() > b.name.toLowerCase() ? 1 : 0
+);
+
+const amsProjectManagementWrapper = Component =>
+  ({ groups = [], users, children, getGroups, getUsers, getRequests, ...props }) => {
+    const project = Config.PROJECT_NAME;
+    React.useEffect(() => {
+      getGroups();
+      getUsers();
+      getRequests();
+    }, [getGroups, getUsers, getRequests]);
+
+    const [groupsInProject, otherGroups] = React.useMemo(() => {
+      return groups.reduce((a, c) => {
+        const authLevel = c.projects.reduce((a, c) => c.project_name === project ? +c.auth_level : a, -1);
+        if (authLevel > -1) {
+          c.authLevel = authLevel;
+          a[0].push(c);
+        }
+        else {
+          a[1].push(c);
+        }
+        return a;
+      }, [[], []]);
+    }, [groups, project]);
+
+    groupsInProject.sort(nameSorter);
+    otherGroups.sort(nameSorter);
+
+    const [usersInProject, otherUsers] = React.useMemo(() => {
+      return users.reduce((a, c) => {
+        if (c.projects.reduce((a, c) => a || (c.project_name === project), false)) {
+          a[0].push(c);
+        }
+        else {
+          a[1].push(c);
+        }
+        return a;
+      }, [[], []]);
+    }, [users, project]);
+    return (
+      <Component { ...props } project={ project }
+        getGroups={ getGroups }
+        getUsers={ getUsers }
+        getRequests={ getRequests }
+        users={ usersInProject }
+        otherUsers={ otherUsers }
+        groups={ groupsInProject }
+        otherGroups={ otherGroups }>
+        { React.Children.toArray(children)
+            .map(child => React.cloneElement(child, {
+              ...props, project,
+              getGroups, getUsers, getRequests,
+              users: usersInProject, otherUsers,
+              groups: groupsInProject, otherGroups
+            }))
+        }
+      </Component>
+    )
   }
+export default amsProjectManagementWrapper;
