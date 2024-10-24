@@ -6,6 +6,7 @@ import { Table } from "~/modules/avl-components/src";
 export default usersWrapper((props) => {
   return (
     <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
+      <div className="text-xl mb-4">Users</div>
       <Table data={props.users} columns={COLUMNS} pageSize={10} striped/>
     </div>
   );
