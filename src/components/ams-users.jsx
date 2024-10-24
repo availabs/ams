@@ -4,9 +4,6 @@ import usersWrapper from "../wrappers/ams-users";
 import { Table } from "~/modules/avl-components/src";
 
 export default usersWrapper((props) => {
-  console.log("users wrapper, props::", props);
-
-  console.log(props.users);
   return (
     <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
       <Table data={props.users} columns={COLUMNS} pageSize={10} striped/>
