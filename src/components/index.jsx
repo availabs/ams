@@ -20,6 +20,7 @@ import AmsUserPreferences from "./ams-user-preferences"
 import AmsSlackPreferences from "./ams-slack-preferences"
 import AmsMessages from "./ams-messages"
 import AmsEmailPreferences from "./ams-email-preferences"
+import AmsUsers from "./ams-users";
 import AmsDefault from './ams-default'
 
 function InvalidConfig ({config}) {
@@ -67,6 +68,7 @@ export default {
   "ams-slack-preferences": AmsSlackPreferences,
   "ams-messages": AmsMessages,
   "ams-email-preferences": AmsEmailPreferences,
+  "ams-users": AmsUsers,
   "ams-default": AmsDefault,
   InvalidConfig,
   NoRouteMatch 

@@ -21,6 +21,7 @@ import amsSlackPreferences from "./ams-slack-preferences"
 import amsEmailPreferences from "./ams-email-preferences"
 import amsMessages from "./ams-messages"
 import postMessageWrapper from "./ams-post-message"
+import amsUsers from './ams-users'
 
 import withAmsApi from "./with-ams-api"
 
@@ -54,7 +55,7 @@ export default {
   "ams-messages": amsMessages,
   "ams-post-message": postMessageWrapper,
   "ams-email-preferences": amsEmailPreferences,
-
+  "ams-users": amsUsers,
   "with-ams-api": withAmsApi,
   "with-preferences": withPreferences,
   "with-slacker": withSlacker
