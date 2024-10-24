@@ -136,6 +136,7 @@ const SetPasswordForm = ({
   verify,
   current
 }) =>  {
+  const myTheme = useContext(ThemeContext);
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div>
@@ -143,7 +144,7 @@ const SetPasswordForm = ({
           Current Password
         </label>
         <div className="mt-1 grid">
-          <Input
+          <input
             id="current"
             name="current"
             type="password"
@@ -152,6 +153,7 @@ const SetPasswordForm = ({
             autoComplete="Current password"
             placeholder="Enter your current password"
             required
+            className={myTheme.input().input}
           />
         </div>
       </div>
@@ -163,7 +165,7 @@ const SetPasswordForm = ({
           New Password
         </label>
         <div className="mt-1 grid">
-          <Input
+          <input
             id="password"
             name="password"
             type="password"
@@ -172,6 +174,7 @@ const SetPasswordForm = ({
             autoComplete="New password"
             placeholder="New password"
             required
+            className={myTheme.input().input}
           />
         </div>
       </div>
@@ -183,7 +186,7 @@ const SetPasswordForm = ({
           Confirm New Password
         </label>
         <div className="mt-1 grid">
-          <Input
+          <input
             id="verify"
             name="verify"
             type="password"
@@ -192,6 +195,7 @@ const SetPasswordForm = ({
             autoComplete="Confirm new password"
             placeholder="Confirm new password"
             required
+            className={myTheme.input().input}
           />
         </div>
       </div>
