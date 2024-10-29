@@ -6,13 +6,14 @@ const nameSorter = (a, b) => (
   a.name.toLowerCase() > b.name.toLowerCase() ? 1 : 0
 );
 
-const amsProjectManagementWrapper = Component =>
-  ({ groups = [], users, children, getGroups, getUsers, getRequests, ...props }) => {
+const amsUsersWrapper = Component =>
+  ({ groups = [], users, children, getGroups, getUsers, getRequests, getUsersPreferences,  ...props }) => {
     const project = Config.PROJECT_NAME;
     React.useEffect(() => {
       getGroups();
       getUsers();
       getRequests();
+      getUsersPreferences({userEmails:['r.k.dubowsky@gmail.com']});
     }, [getGroups, getUsers, getRequests]);
 
     const [groupsInProject, otherGroups] = React.useMemo(() => {
@@ -33,7 +34,7 @@ const amsProjectManagementWrapper = Component =>
     otherGroups.sort(nameSorter);
 
     const [usersInProject, otherUsers] = React.useMemo(() => {
-      return users.reduce((a, c) => {
+      return users.length > 0 ? users.reduce((a, c) => {
         if (c.projects.reduce((a, c) => a || (c.project_name === project), false)) {
           a[0].push(c);
         }
@@ -41,7 +42,7 @@ const amsProjectManagementWrapper = Component =>
           a[1].push(c);
         }
         return a;
-      }, [[], []]);
+      }, [[], []]) : [];
     }, [users, project]);
     return (
       <Component { ...props } project={ project }
@@ -63,4 +64,4 @@ const amsProjectManagementWrapper = Component =>
       </Component>
     )
   }
-export default amsProjectManagementWrapper;
+export default amsUsersWrapper;

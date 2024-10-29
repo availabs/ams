@@ -22,7 +22,8 @@ export {
   usersForGroup,
   assignToGroup,
   removeFromGroup,
-  deleteUser
+  deleteUser,
+  getUsersPreferences
 } from "./users"
 
 export {

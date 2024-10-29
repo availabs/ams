@@ -5,6 +5,8 @@ import { postJson, Config } from "./utils"
 
 export const GET_USERS = "AMS::GET_USERS";
 export const USERS_IN_GROUPS = "AMS::USERS_IN_GROUPS";
+export const GET_USERS_PREFERENCES = "AMS::GET_USERS_PREFERENCES";
+
 
 export const getUsers = () =>
 	(dispatch, getState) => {
@@ -148,3 +150,27 @@ export const createFake = () =>
   	}
   	return Promise.resolve();
 	}
+
+	export const getUsersPreferences = ({userEmails=[], preferenceKey=''}) =>
+		(dispatch, getState) => {
+			const { token } = getState().user;
+			if (token) {
+				const { AUTH_HOST, PROJECT_NAME } = Config();
+				postJson(`${ AUTH_HOST }/users/preferences`, { token, userEmails, preferenceKey })
+					.then(res => {
+						if (res.error) {
+							dispatch(sendSystemMessage(res.error));
+						}
+						else {
+							console.log("dispatching after getting prefer::", res)
+							dispatch({
+								type: GET_USERS_PREFERENCES,
+								preferences: res.preferences || {}
+							})
+						}
+					})
+			}
+			else {
+				return Promise.resolve();
+			}
+		}

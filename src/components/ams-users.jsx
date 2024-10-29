@@ -18,6 +18,16 @@ const DateCell = ({ value, ...props }) => {
   return <div>{myDate.toLocaleDateString()}</div>;
 };
 
+
+const NameCell = (props) => {
+  return (
+    <div>
+      {props.row.original?.preferences?.display_name || ''}
+    </div>
+  );
+};
+
+
 const COLUMN_FILTER_PROPS = {
   filterClassName: 'bg-blue-50 rounded',
   filter: "text",
@@ -25,7 +35,7 @@ const COLUMN_FILTER_PROPS = {
 }
 
 const COLUMNS = [
-  { accessor: "", Header: "Display Name"}, //TODO
+  { accessor: "", Header: "Display Name", Cell: NameCell,},
   {
     accessor: "email",
     Header: "Email",
