@@ -162,7 +162,6 @@ export const createFake = () =>
 							dispatch(sendSystemMessage(res.error));
 						}
 						else {
-							console.log("dispatching after getting prefer::", res)
 							dispatch({
 								type: GET_USERS_PREFERENCES,
 								preferences: res.preferences || {}

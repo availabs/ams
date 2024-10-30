@@ -13,8 +13,15 @@ const amsUsersWrapper = Component =>
       getGroups();
       getUsers();
       getRequests();
-      getUsersPreferences({userEmails:['r.k.dubowsky@gmail.com']});
     }, [getGroups, getUsers, getRequests]);
+
+
+    React.useEffect(() => {
+      if(!users.some(user => !!user.preferences)){
+        const userEmails = users.map(user => user.email);
+        getUsersPreferences({ userEmails });
+      }
+    }, [users]);
 
     const [groupsInProject, otherGroups] = React.useMemo(() => {
       return groups.reduce((a, c) => {
