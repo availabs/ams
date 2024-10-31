@@ -5,7 +5,7 @@ import { Table } from "~/modules/avl-components/src";
 
 export default usersWrapper((props) => {
   return (
-    <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
+    <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="text-xl mb-4">Users</div>
       <Table
         data={props.users}
@@ -18,7 +18,7 @@ export default usersWrapper((props) => {
 });
 
 const DateCell = ({ value, ...props }) => {
-  return <div>{value.toLocaleDateString()}</div>;
+  return <div>{value && value.toLocaleDateString()}</div>;
 };
 
 const COLUMN_FILTER_PROPS = {
@@ -62,10 +62,36 @@ const COLUMNS = [
     Header: "Registered",
     maxWidth: "125px",
     ...COLUMN_FILTER_PROPS,
-    filter:""
   },
-  { accessor: "", Header: "Logins" }, //TODO
-  { accessor: "", Header: "Last Login" }, //TODO
+  { accessor: "logins", Header: "Logins" },
+  { 
+    accessor: (d) => d.lastLogin ? new Date(d.lastLogin.replace(/"/g, "")) : '',
+    Cell: DateCell,
+    sortType: "datetime",
+    Header: "Last Login",
+    sortType: (a, b, columnId, desc ) => {
+      console.log("in sortytpe function",a, b);
+
+      let nullSortValue = -1;
+
+      if(!desc) {
+        nullSortValue = 1;
+      }
+
+      if(!a.original.lastLogin){
+        return nullSortValue;
+      }
+      if(!b.original.lastLogin){
+        return nullSortValue * -1;
+      }
+
+      if(a.original.lastLogin > b.original.lastLogin){
+        return 1;
+      } else {
+        return -1;
+      }
+    }
+  },
   { accessor: "", Header: "Change Role" }, //TODO
   { accessor: "", Header: "Delete User" }, //TODO
 ];

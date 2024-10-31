@@ -6,6 +6,7 @@ import { postJson, Config } from "./utils"
 export const GET_USERS = "AMS::GET_USERS";
 export const USERS_IN_GROUPS = "AMS::USERS_IN_GROUPS";
 export const GET_USERS_PREFERENCES = "AMS::GET_USERS_PREFERENCES";
+export const GET_LOGINS = "AMS::GET_LOGINS"
 
 
 export const getUsers = () =>
@@ -172,4 +173,26 @@ export const createFake = () =>
 			else {
 				return Promise.resolve();
 			}
+		}
+
+
+	export const getLogins = () =>
+		(dispatch, getState) => {
+			const { token } = getState().user;
+			if (token) {
+				return postJson(`${ Config.AUTH_HOST }/logins`, { token })
+					.then(res => {
+						if (res.error) {
+							dispatch(auth());
+							dispatch(sendSystemMessage(res.error));
+						}
+						else {
+							dispatch({
+								type: GET_LOGINS,
+								...res
+							})
+						}
+					})
+			}
+			return Promise.resolve();
 		}

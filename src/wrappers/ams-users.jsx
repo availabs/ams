@@ -7,7 +7,7 @@ const nameSorter = (a, b) => (
 );
 
 const amsUsersWrapper = Component =>
-  ({ groups = [], users, children, getGroups, getUsers, getRequests, getUsersPreferences,  ...props }) => {
+  ({ groups = [], users, children, getGroups, getUsers, getRequests, getUsersPreferences, getLogins, ...props }) => {
     const project = Config.PROJECT_NAME;
     React.useEffect(() => {
       getGroups();
@@ -17,12 +17,17 @@ const amsUsersWrapper = Component =>
 
 
     React.useEffect(() => {
-      if(!users.some(user => !!user.preferences)){
+      if(!users.some(user => !!user.preferences)){ 
         const userEmails = users.map(user => user.email);
         getUsersPreferences({ userEmails });
       }
     }, [users]);
 
+    React.useEffect(() => {
+      if(!users.some(user => !!user.logins)) {
+        getLogins();
+      }
+    }, [getLogins]);
     const [groupsInProject, otherGroups] = React.useMemo(() => {
       return groups.reduce((a, c) => {
         const authLevel = c.projects.reduce((a, c) => c.project_name === project ? +c.auth_level : a, -1);
