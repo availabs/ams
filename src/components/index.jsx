@@ -15,6 +15,7 @@ import AmsSendInvite from "./ams-send-invite"
 import AmsUserSearch from "./ams-user-search"
 import AmsAssignToProject from "./ams-assign-to-project"
 import AmsCreateGroup from "./ams-create-group"
+import AmsGroupManagement from "./ams-group-management"
 import AmsGroupsInProject from "./ams-groups-in-project"
 import AmsUserPreferences from "./ams-user-preferences"
 import AmsSlackPreferences from "./ams-slack-preferences"
@@ -63,6 +64,7 @@ export default {
   "ams-user-search": AmsUserSearch,
   "ams-assign-to-project": AmsAssignToProject,
   "ams-create-group": AmsCreateGroup,
+  "ams-group-management": AmsGroupManagement,
   "ams-groups-in-project": AmsGroupsInProject,
   "ams-user-preferences": AmsUserPreferences,
   "ams-slack-preferences": AmsSlackPreferences,
