@@ -54,7 +54,7 @@ const PendingRequest = ({ request, groups, signupAccept, signupReject, ...props 
                 domain={groups}
                 accessor={(g) => g.name}
                 value={ group } 
-                onChange={ e => setGroup(e.target.value) }
+                onChange={ e => setGroup(e) }
                 placeholder="Select a group..."
               />
             </div>
