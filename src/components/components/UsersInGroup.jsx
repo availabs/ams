@@ -1,15 +1,15 @@
 import React from "react"
 
 import { matchSorter } from 'match-sorter'
-import { Button } from '~/modules/avl-components/src'
+import { Button, Input } from '~/modules/avl-components/src'
 
 const UserHeader = ({ value, onChange, ...props }) =>
   <div className="grid grid-cols-9 font-bold gap-3">
     <div className="col-span-4 border-b-2">
       <div>User Email</div>
       <div className="mb-1">
-        <input small showClear placeholder="Searh users..."
-          value={ value } onChange={ e => onChange(e.target.value) }/>
+        <Input themeOptions={{size:"small"}}  placeholder="Search users..."
+          value={ value } onChange={ e => onChange(e) }/>
       </div>
     </div>
     <div className="col-span-3 border-b-2 flex justify-center items-end">
@@ -88,8 +88,8 @@ export default ({ group, users, ...props }) => {
     <div>
       <div className="mb-5 grid grid-cols-3 gap-2">
         <div className="col-span-1 relative">
-          <input value={ otherUserSearch } onChange={ e => setOtherUserSearch(e.target.value) }
-            placeholder="Search for another user..." showClear/>
+          <Input value={ otherUserSearch } onChange={ e => setOtherUserSearch(e) }
+            placeholder="Search for another user..." />
           { otherUserSearch && otherSearch.length ?
             <div className="absolute left-0 bottom-0 right-0">
               { otherSearch.length <= 5 ? null :

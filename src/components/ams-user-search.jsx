@@ -1,7 +1,7 @@
 import React from "react"
 import wrapper from "../wrappers/ams-user-search"
 import Select from "~/modules/avl-components/src/components/Inputs/select";
-import { ThemeContext, Button } from "~/modules/avl-components/src";
+import { Button, Input } from "~/modules/avl-components/src";
 
 const UserInProjectHeader = () =>
   <div className="grid grid-cols-15 grid-flow-col py-1 gap-3 font-bold">
@@ -110,35 +110,33 @@ const UserInProject = ({ user, groups, assignToGroup, removeFromGroup, deleteUse
 }
 
 export default wrapper(({ search, setSearch, adjustAmount, matches, remaining, ...props }) => {
-  const myTheme = React.useContext(ThemeContext);
-  const buttonClass = myTheme.button({color:"white", size:"sm"}).button
   return (
     <>
       <div className={ `grid grid-cols-2 gap-x-3 gap-y-2` }>
         <div className="col-span-1">
-          <input 
-            className={myTheme.input().input}
-            placeholder="Search for a user..." showClear
-            value={ search } onChange={ e => setSearch(e.target.value) }
+          <Input
+            placeholder="Search for a user..."
+            value={ search }
+            onChange={ e => setSearch(e) }
           />
         </div>
         <div className="col-span-1">
           { !search ? null :
             <div className="flex justify-center">
-              <button 
-                className={buttonClass + "mx-2"}
+              <Button 
+
                 disabled={ matches.length <= 5 }
                 onClick={ e => adjustAmount(-5) }
               >
                 Show Fewer
-              </button>
-              <button
-                className={buttonClass}
+              </Button>
+              <Button
+
                 disabled={ !remaining }
                 onClick={ e => adjustAmount(5) }
               >
                 Show More
-              </button>
+              </Button>
             </div>
           }
         </div>

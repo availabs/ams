@@ -1,11 +1,9 @@
 import React from "react";
-import { ThemeContext, Button } from "~/modules/avl-components/src";
+import { Button, Input } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-create-group";
 
 export default wrapper(
   ({ user, group, authLevel, update, canSubmit, handleSubmit }) => {
-    const myTheme = React.useContext(ThemeContext);
-    const inputClass = myTheme.input().input;
     return (
       <>
         <div className="mb-1">
@@ -17,26 +15,23 @@ export default wrapper(
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-4 gap-1">
             <div className="col-span-2">
-              <input
-                className={`w-full ${inputClass}`}
+              <Input
                 placeholder="Enter group name..."
                 required
-                showClear
                 value={group}
                 onChange={(e) => {
-                  update({ group: e.target.value });
+                  update({ group: e });
                 }}
               />
             </div>
             <div className="col-span-1">
-              <input
-                className={inputClass}
+              <Input
                 type="number"
                 min="0"
                 max={user.authLevel}
                 required
                 value={authLevel}
-                onChange={(e) => update({ authLevel: e.target.value })}
+                onChange={(e) => update({ authLevel: e })}
               />
             </div>
             <div className="col-span-1 grid">

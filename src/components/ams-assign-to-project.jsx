@@ -1,12 +1,10 @@
 import React from "react";
-import { ThemeContext, Button } from "~/modules/avl-components/src";
+import { Input, Button } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-assign-to-project";
 import Select from "~/modules/avl-components/src/components/Inputs/select";
 
 export default wrapper(
   ({ groups, user, group, authLevel, update, canSubmit, handleSubmit }) => {
-    const myTheme = React.useContext(ThemeContext);
-    const numericInputClass = myTheme.input().input;
     return (
       <>
         <div className=" mb-1">
@@ -28,14 +26,14 @@ export default wrapper(
 
             </div>
             <div className="col-span-1">
-              <input
-                className={`h-full ${numericInputClass}`}
+              <Input
+                className="h-full px-1"
                 type="number"
                 min="0"
                 max={user.authLevel}
                 required
                 value={authLevel}
-                onChange={(v) => update({ authLevel: v.target.value })}
+                onChange={(v) => update({ authLevel: v })}
               />
             </div>
             <div className="col-span-1 grid">
