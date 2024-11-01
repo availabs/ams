@@ -1,15 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import usersWrapper from "../wrappers/ams-users";
-import { Table } from "~/modules/avl-components/src";
+import { Table, Button } from "~/modules/avl-components/src";
 
 export default usersWrapper((props) => {
+  const DeleteUserCell = (cellProps) => {
+    return (
+      <div>
+        <Button
+          style={{ height: "60px" }}
+          themeOptions={{ size: "sm", color: "cancel" }}
+          showConfirm
+          onClick={() => {
+            console.log("deleting user::", cellProps.row.original.email)
+            props.deleteUser(cellProps.row.original.email);
+          }}
+        >
+          Delete
+        </Button>
+      </div>
+    );
+  };
+
+  const tableColumns = [...COLUMNS];
+  tableColumns.push({ accessor: "", Header: "Delete User", Cell: DeleteUserCell })
+
   return (
     <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="text-xl mb-4">Users</div>
       <Table
         data={props.users}
-        columns={COLUMNS}
+        columns={tableColumns}
         pageSize={10}
         striped
       />
@@ -93,7 +114,6 @@ const COLUMNS = [
     }
   },
   { accessor: "", Header: "Change Role" }, //TODO
-  { accessor: "", Header: "Delete User" }, //TODO
 ];
 
 function onlyUnique(value, index, array) {
