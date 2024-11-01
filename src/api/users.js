@@ -152,7 +152,7 @@ export const createFake = () =>
   	return Promise.resolve();
 	}
 
-	export const getUsersPreferences = ({userEmails=[], preferenceKey=''}) =>
+	export const getUsersPreferences = ({userEmails=[], preferenceKey}) =>
 		(dispatch, getState) => {
 			const { token } = getState().user;
 			if (token) {
