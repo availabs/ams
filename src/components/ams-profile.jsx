@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import profileWrapper from "../wrappers/ams-profile";
 
-import updatePasswordWrapper from "../wrappers/ams-update-password"
-import userPreferencesWrapper from "../wrappers/ams-user-preferences"
 import { Button, Input } from '~/modules/avl-components/src'
 
 import {
@@ -13,17 +11,6 @@ export default profileWrapper((props) => {
   return <DefaultProfileComponent {...props} />;
 });
 
-const newPassWrap = updatePasswordWrapper((props) => {
-  return <SetPasswordForm
-    {...props}
-  />
-})
-
-const userPreferencesWrap = userPreferencesWrapper((props) => {
-  return <UserPreferencesForm
-    {...props}
-  />
-})
 
 const DefaultProfileComponent = (props) => {
   const { user } = props;
@@ -43,10 +30,14 @@ const DefaultProfileComponent = (props) => {
         </p>
       </div>
       <ProfileTile title="Personal Info" tileWidth="sm:max-w-lg">
-        {userPreferencesWrap(props)}
+      <UserPreferencesForm
+          {...props}
+        />
       </ProfileTile>
       <ProfileTile title="Update Password" tileWidth="sm:max-w-lg">
-        {newPassWrap(props)}
+      <SetPasswordForm
+        {...props}
+      />
       </ProfileTile>
     </div>
   );
@@ -74,25 +65,9 @@ const UserPreferencesForm = (props) => {
     display_name: {
       name: "Display Name:",
       type: 'text'
-    },
-    phone: {
-      name: "Phone:",
-      type: 'text'
-    },
-    maxRecent: {
-      name: "Max # of recent activities on Dashboard:",
-      type: 'number'
-    },
-    maxExpanded: {
-      name: "Max # of recent activities when expanded",
-      type: 'number'
-    },
-    maxSnapshots: {
-      name: "Max # of snapshots on Dashboard",
-      type: 'number'
-    },
+    }
   };
-
+  
   return (
     <div className="space-y-6">
       {Object.keys(PREFERENCES_CONFIG).map((preferenceKey) => {
