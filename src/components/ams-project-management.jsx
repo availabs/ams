@@ -33,8 +33,6 @@ const ProjectManagementTile = ({
 };
 
 export default wrapper((props) => {
-  const myTheme = React.useContext(ThemeContext);
-
   return (
     <div className={props.className}>
       <div className="flex flex-wrap mt-10">
