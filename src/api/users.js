@@ -152,10 +152,11 @@ export const createFake = () =>
   	return Promise.resolve();
 	}
 
-	export const getUsersPreferences = ({userEmails=[], preferenceKey}) =>
+	export const getUsersPreferences = (props = {userEmails:[], preferenceKey: null}) =>
 		(dispatch, getState) => {
 			const { token } = getState().user;
 			if (token) {
+				const {userEmails, preferenceKey} = props;
 				const { AUTH_HOST, PROJECT_NAME } = Config();
 				postJson(`${ AUTH_HOST }/users/preferences`, { token, userEmails, preferenceKey })
 					.then(res => {
