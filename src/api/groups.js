@@ -101,12 +101,12 @@ export const deleteGroup = name =>
 			return Promise.resolve();
 		}
 	}
-export const createAndAssign = (group_name, auth_level) =>
+export const createAndAssign = (group_name, auth_level, meta={}) =>
 	(dispatch, getState) => {
 		const { token } = getState().user;
 		if (token) {
 			return postJson(`${ Config.AUTH_HOST }/group/create/project/assign`, {
-					token, group_name, project_name: Config.PROJECT_NAME, auth_level
+					token, group_name, meta, project_name: Config.PROJECT_NAME, auth_level
 				})
 				.then(res => {
 					if (res.error) {
