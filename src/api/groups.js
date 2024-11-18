@@ -206,3 +206,28 @@ export const adjustAuthLevel = (group_name, auth_level) =>
 			return Promise.resolve();
 		}
 	}
+
+	export const updateGroupMeta = (group_name, meta) =>
+		(dispatch, getState) => {
+			const { token } = getState().user;
+			if (token) {
+				return postJson(`${ Config.AUTH_HOST }/group/meta/update`, {
+						token, group_name, meta
+					})
+					.then(res => {
+						if (res.error) {
+							dispatch(auth());
+							dispatch(sendSystemMessage(res.error));
+						}
+						else {
+							dispatch(getGroups());
+							if (res.message) {
+								dispatch(sendSystemMessage(res.message));
+							}
+						}
+					})
+			}
+			else {
+				return Promise.resolve();
+			}
+		}

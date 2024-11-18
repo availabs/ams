@@ -14,7 +14,8 @@ export {
   createAndAssign,
   assignToProject,
   removeFromProject,
-  adjustAuthLevel
+  adjustAuthLevel,
+  updateGroupMeta
 } from "./groups"
 
 export {
