@@ -16,8 +16,8 @@ const amsProjectManagementWrapper = Component =>
     }, [getGroups, getUsers, getRequests]);
 
     const [groupsInProject, otherGroups] = React.useMemo(() => {
-      return groups.reduce((a, c) => {
-        const authLevel = c.projects.reduce((a, c) => c.project_name === project ? +c.auth_level : a, -1);
+      return groups?.reduce((a, c) => {
+        const authLevel = c?.projects?.reduce((a, c) => c.project_name === project ? +c.auth_level : a, -1);
         if (authLevel > -1) {
           c.authLevel = authLevel;
           a[0].push(c);
