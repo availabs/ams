@@ -88,11 +88,8 @@ const COLUMNS = [
   { 
     accessor: (d) => d.lastLogin ? new Date(d.lastLogin.replace(/"/g, "")) : '',
     Cell: DateCell,
-    sortType: "datetime",
     Header: "Last Login",
     sortType: (a, b, columnId, desc ) => {
-      console.log("in sortytpe function",a, b);
-
       let nullSortValue = -1;
 
       if(!desc) {
