@@ -7,6 +7,7 @@ function defaultTheme () {
     accent2: "bg-gray-300",
     accent3: "bg-gray-400",
     accent4: "bg-gray-500",
+		transition: "transition ease-in-out duration-150",
 		landing: {
 			wrapper: 'p-4 border-2 border-blue-300'
 		},
