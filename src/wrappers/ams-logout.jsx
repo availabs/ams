@@ -10,6 +10,10 @@ export default Component =>
       authLevel: 0
     }
     render() {
+      const { user, redirectTo } = this.props;
+      if (!user.authed) {
+        return <Navigate to={ redirectTo }/>
+      }
       return <Component { ...this.props }/>;
     }
   }
