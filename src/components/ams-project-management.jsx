@@ -1,7 +1,6 @@
 import React from "react";
 import wrapper from "../wrappers/ams-project-management";
-import { ThemeContext } from "~/modules/avl-components/src";
-
+import ThemeContext from '../theme'
 import AmsRequests from "./ams-requests";
 import AmsSendInvite from "./ams-send-invite";
 import AmsUserSearch from "./ams-user-search";

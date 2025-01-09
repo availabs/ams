@@ -1,7 +1,6 @@
 import React from "react";
-import { Input, Button } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-assign-to-project";
-import Select from "~/modules/avl-components/src/components/Inputs/select";
+import { Input, Button, Select } from "../ui_components";
 
 export default wrapper(
   ({ groups, user, group, authLevel, update, canSubmit, handleSubmit }) => {

@@ -1,10 +1,6 @@
 import React from "react"
-import {
-  Button
-} from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-requests"
-import Select from "~/modules/avl-components/src/components/Inputs/select";
-
+import { Button, Select } from "../ui_components";
 
 const PendingHeader = () =>
   <div className="grid grid-cols-12 gap-3 font-bold">

@@ -1,12 +1,9 @@
 import React, { useContext } from "react";
 import profileWrapper from "../wrappers/ams-profile";
 
-import { Button, Input } from '~/modules/avl-components/src'
+import { Input, Button } from "../ui_components";
 
-import {
-  ThemeContext,
-} from "~/modules/avl-components/src";
-
+import ThemeContext from '../theme'
 export default profileWrapper((props) => {
   return <DefaultProfileComponent {...props} />;
 });

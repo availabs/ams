@@ -3,9 +3,8 @@ import React from "react"
 import UsersInGroup from "./UsersInGroup"
 
 import get from "lodash/get"
-import { Button, Input } from '~/modules/avl-components/src'
-import { ThemeContext } from "~/modules/avl-components/src";
-
+import ThemeContext from '../../theme'
+import { Button, Input  } from "../../ui_components";
 
 export const GroupHeader = ({ onChange, value }) =>
   <div className="grid grid-cols-12 gap-3 text-center font-bold mb-1">

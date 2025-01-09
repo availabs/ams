@@ -1,7 +1,6 @@
 import React from "react";
 import wrapper from "../wrappers/ams-project-management";
-import { ThemeContext } from "~/modules/avl-components/src";
-
+import ThemeContext from '../theme'
 import AmsAssignToProject from "./ams-assign-to-project";
 import AmsCreateGroup from "./ams-create-group";
 import AmsGroupsInProject from "./ams-groups-in-project";

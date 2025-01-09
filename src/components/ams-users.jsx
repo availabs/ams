@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import usersWrapper from "../wrappers/ams-users";
-import { Table, Button } from "~/modules/avl-components/src";
-
+import { Table, Button } from "../ui_components";
 export default usersWrapper((props) => {
   const DeleteUserCell = (cellProps) => {
     return (

@@ -1,8 +1,7 @@
 import React from "react"
 import wrapper from "../wrappers/ams-user-search"
-import Select from "~/modules/avl-components/src/components/Inputs/select";
-import { Button, Input } from "~/modules/avl-components/src";
 
+import { Input, Button, Select } from "../ui_components";
 const UserInProjectHeader = () =>
   <div className="grid grid-cols-15 grid-flow-col py-1 gap-3 font-bold">
     <div className="col-span-5 border-b-2">

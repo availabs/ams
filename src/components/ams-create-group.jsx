@@ -1,6 +1,6 @@
 import React from "react";
-import { Button, Input } from "~/modules/avl-components/src";
 import wrapper from "../wrappers/ams-create-group";
+import { Input, Button } from "../ui_components";
 
 export default wrapper(
   ({ user, group, authLevel, update, canSubmit, handleSubmit }) => {

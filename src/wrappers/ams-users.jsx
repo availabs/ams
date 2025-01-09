@@ -25,7 +25,7 @@ const amsUsersWrapper = Component =>
 
     React.useEffect(() => {
       if(!users.some(user => !!user.logins)) {
-        getLogins();
+        //getLogins(); //Temp removed because it crashes the page if you don't have auth to see logins
       }
     }, [getLogins]);
     const [groupsInProject, otherGroups] = React.useMemo(() => {

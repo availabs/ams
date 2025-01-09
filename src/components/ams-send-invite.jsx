@@ -1,9 +1,8 @@
 import React from "react";
-import { ThemeContext, Button } from "~/modules/avl-components/src";
-
+import ThemeContext from '../theme'
+import { Button, Select } from "../ui_components";
 import wrapper from "../wrappers/ams-send-invite";
 
-import Select from "~/modules/avl-components/src/components/Inputs/select";
 export default wrapper(
   ({ email, verify, group, update, canSubmit, handleSubmit, groups }) => {
     const myTheme = React.useContext(ThemeContext);
