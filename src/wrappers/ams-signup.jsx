@@ -1,6 +1,5 @@
 import React from "react"
-
-import { redirect } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 export default Component =>
   class SignupWrapper extends React.Component {
@@ -23,7 +22,7 @@ export default Component =>
       const { email, verify } = this.state,
         canSubmit = email && verify && (email === verify);
       if (this.props.user.authed) {
-        return redirect(this.props.redirectTo)//<Redirect to={ this.props.redirectTo }/>
+        return <Navigate to={ this.props.redirectTo }/>
       }
       return (
         <Component { ...this.props } { ...this.state }
