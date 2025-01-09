@@ -26,7 +26,7 @@ function defaultTheme () {
 			rowLabel: 'px-4 w-28 text-sm',
 			rowContent: 'flex-1'
 		},
-		tile: "bg-tigGray-50 py-8 px-10  border-t-4 border-tigGreen-100 rounded-t",
+		tile: "bg-[#EEEEEE] py-8 px-10  border-t-4 border-[#679d89] rounded-t",
 		button: (opts = {}) => {
 			const {color = 'tig', size = 'base', width = 'block'} = opts
 			let colors = {
@@ -36,8 +36,8 @@ function defaultTheme () {
 						active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out
 				`,
 				tig:`
-						h-full hover:bg-tigGray-50 hover:text-yellow-500 hover:cursor-pointer 
-						bg-tigGray-200 text-[13px] font-light md:mr-2
+						h-full hover:bg-[#EEEEEE] hover:text-yellow-500 hover:cursor-pointer 
+						bg-[#D2D2D2] text-[13px] font-light md:mr-2
 				`,
 				cancel: `
 						border border-red-300  text-red-700 bg-white hover:text-red-500
@@ -149,12 +149,12 @@ function defaultTheme () {
 							align-top`,
 					tableInfoBar: "bg-white",
 					tableRow: `${colors[color]} transition ease-in-out duration-150 hover:bg-gray-300`,
-					tableRowStriped: `bg-white odd:bg-tigGray-25 hover:bg-tigGray-100 bg-opacity-25 transition ease-in-out duration-150`,
+					tableRowStriped: `bg-white odd:bg-[#F9F9F9] hover:bg-[#E6E6E6] bg-opacity-25 transition ease-in-out duration-150`,
 					tableCell: `${sizes[size]} break-words border border-gray-200 pl-1 align-top font-light text-sm`,
 					inputSmall: 'w-24',
-					sortIconDown: 'fas fa-sort-amount-down text-tigGray-300 opacity-75',
-					sortIconUp: 'fas fa-sort-amount-up text-tigGray-300 opacity-75',
-					sortIconIdeal: 'fa fa-sort-alt text-tigGray-300 opacity-25',
+					sortIconDown: 'fas fa-sort-amount-down text-gray-300 opacity-75',
+					sortIconUp: 'fas fa-sort-amount-up text-gray-300 opacity-75',
+					sortIconIdeal: 'fa fa-sort-alt text-gray-300 opacity-25',
 					vars: {
 							color: colors,
 							size: sizes
