@@ -1,7 +1,10 @@
 import React from "react"
 
 const amsMessagesWrapper = Component => {
-  return ({ messages, viewMessages, deleteMessages, ...props }) => {
+  return ({ messages, viewMessages, deleteMessages, getMessages, ...props }) => {
+    React.useEffect(() => {
+      getMessages();
+    },[]);
 
     const [undeleted, deleted] = React.useMemo(() => {
       return messages.reduce((a, c) => {

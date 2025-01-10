@@ -5,6 +5,7 @@ import Container from "./components/Container"
 import { Modal, useModal } from "./components/Modal"
 
 import PostMessage from "./ams-post-message"
+import MessageWrapper from "../wrappers/ams-messages"
 
 const MessagesHeading = ({ showModal, ...props }) => {
   return (
@@ -90,12 +91,7 @@ const AmsMessages = props => {
   )
 }
 
-const amsMessagesConfig = ({
-  type: AmsMessages,
-  wrappers: ["ams-messages"]
-})
-
-export default amsMessagesConfig;
+export default MessageWrapper(AmsMessages);
 
 const Message = props => {
 
