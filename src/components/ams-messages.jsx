@@ -6,6 +6,7 @@ import { Modal, useModal } from "./components/Modal"
 
 import PostMessage from "./ams-post-message"
 import MessageWrapper from "../wrappers/ams-messages"
+import { MarkdownViewer } from "../ui_components";
 
 const MessagesHeading = ({ showModal, ...props }) => {
   return (
@@ -37,7 +38,7 @@ const AmsMessages = props => {
   const Title = React.useMemo(() => {
     return <MessagesHeading showModal={ showModal }/>
   }, [showModal]);
-
+  console.log("inside ams messages, messages::", messages)
   return (
     <>
       <Modal { ...modalState }>
@@ -151,7 +152,7 @@ const Message = props => {
 
       </div>
 
-      { !open ? null : <textarea>{message}</textarea> }
+      { !open ? null :  <MarkdownViewer markdown={message} /> }
 
     </div>
   )
