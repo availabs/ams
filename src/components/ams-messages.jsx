@@ -38,7 +38,7 @@ const AmsMessages = props => {
   const Title = React.useMemo(() => {
     return <MessagesHeading showModal={ showModal }/>
   }, [showModal]);
-  console.log("inside ams messages, messages::", messages)
+
   return (
     <>
       <Modal { ...modalState }>
