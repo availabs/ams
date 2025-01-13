@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import profileWrapper from "../wrappers/ams-profile";
 
-import { Input, Button } from "../ui_components";
+import { Input, Button, BooleanInput } from "../ui_components";
 
 import ThemeContext from '../theme'
 export default profileWrapper((props) => {
@@ -62,19 +62,38 @@ const UserPreferencesForm = (props) => {
     display_name: {
       name: "Display Name:",
       type: 'text'
-    }
+    },
+    receiveEmail: {
+      name: "Receive Email Messages:",
+      type: 'boolean'
+    },
+    // receiveSlackMessages: {
+    //   name: "Receive Slack Messages:",
+    //   type: 'boolean'
+    // }
   };
   
   return (
     <div className="space-y-6">
       {Object.keys(PREFERENCES_CONFIG).map((preferenceKey) => {
         const preferenceConfg = PREFERENCES_CONFIG[preferenceKey];
+
+        let InputComponent; 
+
+        switch(preferenceConfg.type) {
+          case 'boolean':
+            InputComponent = BooleanInput;
+            break;
+          default:
+            InputComponent = Input;
+        }
+
         return (
           <InputContainer
             key={`${preferenceKey}_preferences_form`}
             header={preferenceConfg.name}
             input={
-              <Input
+              <InputComponent
                 type={preferenceConfg.type}
                 value={preferences[preferenceKey]}
                 placeholder=""

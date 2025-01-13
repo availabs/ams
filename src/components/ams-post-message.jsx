@@ -3,6 +3,8 @@ import React from "react"
 
 import { Input, Select } from "../ui_components";
 import { postMessageWrapper, MessageTypes } from "../wrappers/ams-post-message"
+import { MarkdownViewer } from "../ui_components";
+
 
 const PostMessage = ({ postState,
                         updatePostState,
@@ -13,7 +15,6 @@ const PostMessage = ({ postState,
                         onPostMessage, ...props }) => {
 
   const { heading, message, type, target, filterGroups } = postState;
-
   const doPostMessage = React.useCallback(e => {
     postMessage()
       .then(() => {
@@ -75,8 +76,7 @@ const PostMessage = ({ postState,
         <div>
           <label className="font-bold">Message Preview</label>
           <div className="bg-white rounded px-2 py-0">
-            <textarea>{message}</textarea>
-            {/*<MarkdownViewer markdown={ message }/>*/}
+            <MarkdownViewer markdown={ message }/>
           </div>
         </div>
 
