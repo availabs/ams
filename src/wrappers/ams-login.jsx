@@ -23,13 +23,16 @@ export default Component =>
       const { email, password } = this.state,
         canSubmit = email && password,
 
-        { location, user, redirectTo } = this.props,
+        { location, user } = this.props,
         { pathname } = location;
+
+        let {redirectTo} = this.props;
+        redirectTo = location?.state?.redirectTo ?? redirectTo;
 
       if (user.authed) {
         const from = get(location, ["state", "from"]),
           to = ((pathname === from) || !from) ? redirectTo : from;
-        return <Navigate to={ to }/>
+        return <Navigate to={ to } state={null} />
       }
       return (
         <Component { ...this.props } { ...this.state }
