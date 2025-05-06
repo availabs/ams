@@ -1,6 +1,6 @@
 import React from "react"
 
-import { redirect } from "react-router-dom"
+import { redirect } from "react-router"
 
 export default Component =>
   class Wrapper extends React.Component {
