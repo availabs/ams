@@ -21,6 +21,8 @@ const store = configureStore({
   },
 });
 
+const AuthContext = React.createContext(defaultUserState());
+export const useAuth = () => React.useContext(AuthContext);
 
 export const enableAuth = (Component, config) => {
   Config(config);
@@ -50,8 +52,7 @@ export const authProvider = (Component, config) => {
   return AuthProvider;
 }
 
-const AuthContext = React.createContext(defaultUserState());
-export const useAuth = () => React.useContext(AuthContext);
+
 
 export const withAuth = Component => {
   const mapStateToProps = (state, props) => ({ user: state.user });
