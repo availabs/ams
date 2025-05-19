@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import comps from '../components'
 import { getActiveView, validFormat } from './_utils'
 import ThemeContext from '../theme'
