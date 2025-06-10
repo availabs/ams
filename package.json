@@ -1,6 +1,6 @@
 {
   "name": "@availabs/ams",
-  "version": "2.0.7",
+  "version": "2.1.1",
   "description": "AVAIL Auth Management System",
   "main": "dist/index.js",
   "scripts": {

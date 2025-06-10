@@ -1,5 +1,5 @@
-const primary =  'nuetral'
-const highlight =  'white'
+//const primary =  'nuetral'
+//const highlight =  'white'
 const accent =  'blue'
 function defaultTheme () {
 	return {
@@ -11,7 +11,7 @@ function defaultTheme () {
 		landing: {
 			wrapper: 'p-4 border-2 border-blue-300'
 		},
-		table: {
+		tableSimple: {
 			'table': 'min-w-full divide-y divide-gray-300',
 			'thead': '',
 			'th': 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900',

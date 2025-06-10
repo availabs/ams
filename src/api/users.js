@@ -157,7 +157,7 @@ export const createFake = () =>
 			const { token } = getState().user;
 			if (token) {
 				const {userEmails, preferenceKey} = props;
-				const { AUTH_HOST, PROJECT_NAME } = Config();
+				const { AUTH_HOST/*, PROJECT_NAME*/ } = Config();
 				postJson(`${ AUTH_HOST }/users/preferences`, { token, userEmails, preferenceKey })
 					.then(res => {
 						if (res.error) {
