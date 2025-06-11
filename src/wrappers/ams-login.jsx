@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Navigate } from "react-router"
+import { useNavigate, useLocation, Navigate } from "react-router"
 
 import get from "lodash/get"
 
@@ -29,10 +29,12 @@ export default Component =>
         let {redirectTo} = this.props;
         redirectTo = location?.state?.redirectTo ?? redirectTo;
 
+        console.log('hola', this.props)
+
       if (user.authed) {
         const from = get(location, ["state", "from"]),
           to = ((pathname === from) || !from) ? redirectTo : from;
-        return <Navigate to={ to } state={null} />
+        this.props.navigate(to,{ replace: true, state: null })//<Navigate to={ to } state={null} />
       }
       return (
         <Component { ...this.props } { ...this.state }
@@ -42,3 +44,42 @@ export default Component =>
       );
     }
   }
+// export default Component => ({
+//     redirectTo = '/',
+//     user,
+//     login
+//   }) => {
+
+//     console.log('hola', Component, props)
+//     const handleSubmit = (e) => {
+//       e.preventDefault();
+//       login(state.email, state.password);
+//     }
+
+//     const [state, setState] = React.useState({
+//       email: "",
+//       password: ""
+//     })
+//     const navigate = useNavigate()
+//     const location = useLocation()
+//     const { email, password } = state;
+//     const canSubmit = email && password;
+//     const { pathname } = location;
+
+    
+//     redirectTo = location?.state?.redirectTo ?? redirectTo;
+
+//     if (user.authed) {
+//       const from = get(location, ["state", "from"]),
+//         to = ((pathname === from) || !from) ? redirectTo : from;
+//       //console.log('to', to, 'from', from)
+//       return navigate(to)
+//     }
+//     return (
+//       <Component { ...state }
+//         handleSubmit={ e => handleSubmit(e) }
+//         update={ u => setState(u) }
+//         canSubmit={ canSubmit }/>
+//     );
+  
+// }

@@ -12,7 +12,7 @@ export default Component =>
     render() {
       const { user, redirectTo } = this.props;
       if (!user.authed) {
-        return <Navigate to={ redirectTo }/>
+        this.props.navigate(redirectTo,{ replace: true, state: null })//<Navigate to={ to } state={null} />
       }
       return <Component { ...this.props }/>;
     }

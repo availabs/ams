@@ -3,7 +3,8 @@ import React from "react"
 // // import { RouterContext } from "../contexts"
 
 import {
-  useLocation
+  useLocation, 
+  useNavigate
 } from "react-router"
 
 // const RouterContext = React.createContext({});
@@ -41,5 +42,6 @@ import {
 
 export default Component => (props) => {
 	const location = useLocation()
-	return <Component {...props} location={location}/>
+	const navigate = useNavigate()
+	return <Component {...props} location={location} navigate={navigate}/>
 }
