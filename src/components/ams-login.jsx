@@ -3,7 +3,7 @@ import { Link } from "react-router"
 import loginWrapper from "../wrappers/ams-login"
 
 export default loginWrapper(({ email, password, update, canSubmit, handleSubmit, title="",...props }) => { 
-    console.log('hola', props)
+    //console.log('hola', props)
     return (
     <div className="h-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
