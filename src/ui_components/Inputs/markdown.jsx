@@ -7,13 +7,13 @@ import { useTheme } from '../../theme'
 
 import MarkdownRenderer from "react-markdown"
 
-import linkifyIt from "linkify-it"
-import tlds from "tlds"
+//import linkifyIt from "linkify-it"
+//import tlds from "tlds"
 
-const linkify = linkifyIt()
-  .tlds(tlds)
-  .add("ftp", null)
-  .set({ fuzzyIP: true });
+// const linkify = linkifyIt()
+//   .tlds(tlds)
+//   .add("ftp", null)
+//   .set({ fuzzyIP: true });
 
 const Link = ({ href, children }) => {
   const theme = useTheme();
@@ -26,7 +26,7 @@ const Link = ({ href, children }) => {
   )
 }
 const Text = ({ value = "" }) => {
-  const links = linkify.match(value);
+  const links = [] //linkify.match(value);
   if (!links) return value;
   const response = []
   let index = 0;
