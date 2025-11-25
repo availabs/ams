@@ -12,7 +12,7 @@ import {
 
 const SystemMessages = ({ messages, dismissSystemMessage }) =>
 	!messages?.length ? <span /> :
-	<div className='fixed z-50 top-[70px] right-[350px]'>
+	<div className='fixed z-50 top-[70px] right-[35px] max-w-[300px]'>
 		{ messages.map((message, i) =>
 				message.onConfirm ?
 					<ConfirmMessage key={ message.id } top={ i * 3 } { ...message }

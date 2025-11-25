@@ -1,21 +1,20 @@
 import React from 'react';
 //import './messages.css'
 
-
 const Message = ({ message, top, type, show, dismiss, confirm = null }) => {
   const theme = {
     'bgDanger' : 'bg-red-300 border border-red-400'
   }
-  console.log('type', type, top)
+  const showClass = show === "show" ? "visible" : "hidden";
   return (
-    <div className={ `bg-white absolute whitespace-nowrap rounded ${ show }` }
+    <div className={ `bg-white overflow-y-auto w-[100%] h-max-[200px] box-border rounded ${ showClass }` }
       style={ { top: `${ top }rem` } }>
       <div className={ `
           bg-opacity-25 ${ theme[`bg${ type }`] }
-          rounded px-6 py-2 text-large
+          rounded py-2 text-large flex box-border
         ` }>
-        <div className="flex justify-center ">
-          <div className="mr-4 p-2">{ message }</div>
+      
+          <div className="p-2 ">{ message }</div>
           <button onClick={ dismiss } className={`px-3 rounded-md hover:bg-white text-xl`}>
             ✕
           </button>
@@ -26,7 +25,7 @@ const Message = ({ message, top, type, show, dismiss, confirm = null }) => {
               </button>
             </span>
           }
-        </div>
+     
       </div>
     </div>
   )
