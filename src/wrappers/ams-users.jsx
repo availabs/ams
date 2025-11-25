@@ -8,6 +8,7 @@ const nameSorter = (a, b) => (
 
 const amsUsersWrapper = Component =>
   ({ groups = [], users, children, getGroups, getUsers, getRequests, getUsersPreferences, getLogins, ...props }) => {
+    console.log({props, getLogins})
     const project = Config.PROJECT_NAME;
     React.useEffect(() => {
       getGroups();
@@ -23,11 +24,6 @@ const amsUsersWrapper = Component =>
       }
     }, [users]);
 
-    React.useEffect(() => {
-      if(!users.some(user => !!user.logins)) {
-        //getLogins(); //Temp removed because it crashes the page if you don't have auth to see logins
-      }
-    }, [getLogins]);
     const [groupsInProject, otherGroups] = React.useMemo(() => {
       return groups.reduce((a, c) => {
         const authLevel = c?.projects?.reduce((a, c) => c.project_name === project ? +c.auth_level : a, -1);

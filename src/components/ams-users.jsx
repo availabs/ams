@@ -73,7 +73,6 @@ const COLUMNS = [
     minWidth: "150px",
     ...COLUMN_FILTER_PROPS,
   },
-
   {
     accessor: (d) => new Date(d.created_at.replace(/"/g, "")),
     Cell: DateCell,
@@ -82,33 +81,6 @@ const COLUMNS = [
     maxWidth: "125px",
     ...COLUMN_FILTER_PROPS,
   },
-  { accessor: "logins", Header: "Logins" },
-  { 
-    accessor: (d) => d.lastLogin ? new Date(d.lastLogin.replace(/"/g, "")) : '',
-    Cell: DateCell,
-    Header: "Last Login",
-    sortType: (a, b, columnId, desc ) => {
-      let nullSortValue = -1;
-
-      if(!desc) {
-        nullSortValue = 1;
-      }
-
-      if(!a.original.lastLogin){
-        return nullSortValue;
-      }
-      if(!b.original.lastLogin){
-        return nullSortValue * -1;
-      }
-
-      if(a.original.lastLogin > b.original.lastLogin){
-        return 1;
-      } else {
-        return -1;
-      }
-    }
-  },
-  { accessor: "", Header: "Change Role" }, //TODO
 ];
 
 function onlyUnique(value, index, array) {
