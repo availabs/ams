@@ -8,7 +8,6 @@ const nameSorter = (a, b) => (
 
 const amsUsersWrapper = Component =>
   ({ groups = [], users, children, getGroups, getUsers, getRequests, getUsersPreferences, getLogins, ...props }) => {
-    console.log({props, getLogins})
     const project = Config.PROJECT_NAME;
     React.useEffect(() => {
       getGroups();

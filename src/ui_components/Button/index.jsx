@@ -40,13 +40,8 @@ const ConfirmButton = ({
       {...props}
       type={canClick ? type : "button"}
     >
-      <div className="relative w-full">
-        {!canClick ? null : (
-          <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center overflow-hidden">
-            <div>{confirmMessage}</div>
-          </div>
-        )}
-        <div style={{ color: canClick ? "transparent" : null }}>{children}</div>
+      <div>
+        {!canClick ? children : (confirmMessage)}
       </div>
     </button>
   );

@@ -8,7 +8,6 @@ export const RenderCell = ({
                            }) => {
     return (
         <td 
-            key={ii} 
             {
                 ...cell.getCellProps({
                 style: {
@@ -19,6 +18,7 @@ export const RenderCell = ({
                 })
             } 
             className={`text-${get(columns.find(c => c.Header === cell.column.Header), 'align') || 'center'} ${theme.tableCell}`}
+            key={ii} 
         >
             {(ii > 0) || ((row.subRows.length === 0) && (expand.length === 0)) ?
                 cell.render('Cell') :

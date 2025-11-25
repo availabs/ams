@@ -7,6 +7,7 @@ export default usersWrapper((props) => {
       <div>
         <Button
           style={{ height: "60px" }}
+          confirmMessage="Confirm delete"
           themeOptions={{ size: "sm", color: "cancel" }}
           showConfirm
           onClick={() => {

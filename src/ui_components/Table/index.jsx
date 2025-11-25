@@ -190,20 +190,22 @@ export default ({
                     }}>
                     <Loading width={'100%'} height={'100%'}/>
                 </div>}
-                <table {...getTableProps()} className="w-full">
+                <table {...getTableProps()}  className="w-full">
                     <thead>
                     {headerGroups.map(headerGroup =>
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.getHeaderGroupProps()?.key}>
                             {headerGroup.headers
                                 .map(column =>
-                                    <th {...column.getHeaderProps({
+                                    <th 
+                                        {...column.getHeaderProps({
                                         ...column.getSortByToggleProps(),
                                         style: {
                                             minWidth: column.minWidth,
                                             width: column.width,
                                             maxWidth: column.maxWidth
                                         },
-                                    })}
+                                        })}
+                                        key={column.getHeaderProps()?.key}
                                         className={theme.tableHeader}>
                                         <div className={'flex flex-col'}>
                                             <div className={`flex justify-between items-center`}>
@@ -247,6 +249,7 @@ export default ({
                         return (
                             <React.Fragment key={row.getRowProps().key}>
                                 <tr {...row.getRowProps()}
+                                    key={row.getRowProps()?.key}
                                     onMouseEnter={typeof onRowEnter === "function" ? e => onRowEnter(e, row) : null}
                                     onMouseLeave={typeof onRowLeave === "function" ? e => onRowLeave(e, row) : null}
                                     className={`
