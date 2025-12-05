@@ -34,7 +34,8 @@ export default Component =>
       if (user.authed) {
         const from = get(location, ["state", "from"]),
           to = ((pathname === from) || !from) ? redirectTo : from;
-        this.props.navigate(to,{ replace: true, state: null })//<Navigate to={ to } state={null} />
+          return <Navigate to={ to } state={null} />
+          //this.props.navigate(to,{ replace: true, state: null })//<Navigate to={ to } state={null} />
       }
       return (
         <Component { ...this.props } { ...this.state }
